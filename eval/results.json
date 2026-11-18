@@ -1,0 +1,5028 @@
+{
+  "project": "Pramaan",
+  "ps": "SIH26104",
+  "generated_utc": "2026-09-15T17:31:40Z",
+  "dataset": {
+    "n_clips": 3429,
+    "n_bona": 510,
+    "n_spoof": 2919,
+    "by_generator": {
+      "none": 510,
+      "freevc24": 250,
+      "xtts_v2": 250,
+      "encodec": 510,
+      "chatterbox": 39,
+      "mac_say": 340,
+      "mms_vits": 510,
+      "kokoro": 170,
+      "espeak_ng": 510,
+      "piper": 340
+    },
+    "by_family": {
+      "human": 510,
+      "voice_conversion": 250,
+      "autoregressive_tts": 250,
+      "neural_codec": 510,
+      "llm_tts_2025": 39,
+      "concatenative_tts": 340,
+      "vits_e2e": 510,
+      "style_tts_decoder": 170,
+      "formant_tts": 510,
+      "vits_onnx": 340
+    },
+    "by_language": {
+      "hindi": 1729,
+      "tamil": 680,
+      "telugu": 1020
+    },
+    "n_embeddings": 70424,
+    "conditions": [
+      "clean",
+      "g722_64k",
+      "g723_1_6k3",
+      "g726_32k",
+      "opus_24k",
+      "opus_8k",
+      "speex_wb_q4"
+    ],
+    "extra_channels": [
+      "replay_mic",
+      "replay_mic_v0.4"
+    ],
+    "unavailable_conditions": {
+      "amr_wb": "ffmpeg 8.1.2 decodes AMR-WB but has no encoder; no free encoder on this machine.",
+      "evs": "EVS is absent from ffmpeg entirely and has no open-source encoder available here."
+    }
+  },
+  "ship": {
+    "n_trainable": 2049,
+    "generators": [
+      "xtts_v2",
+      "freevc24",
+      "encodec",
+      "mac_say",
+      "mms_vits",
+      "kokoro",
+      "espeak_ng",
+      "piper"
+    ],
+    "prefixes": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0
+    ],
+    "band": {
+      "0.5": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "1.0": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "1.5": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "2.0": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "2.5": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "3.0": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "3.5": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      },
+      "4.0": {
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01
+      }
+    },
+    "band_scope": "clean channel",
+    "band_by_channel": {
+      "clean": {
+        "0.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "1.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "1.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "2.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "3.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        }
+      },
+      "g722_64k": {
+        "1.5": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        }
+      },
+      "g726_32k": {
+        "1.5": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.027777777777777776,
+          "tau_human": 0.01
+        }
+      },
+      "opus_24k": {
+        "0.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "1.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "1.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "2.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "3.5": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.013888888888888888,
+          "tau_human": 0.01
+        }
+      },
+      "speex_wb_q4": {
+        "1.5": {
+          "tau_clone": 0.2,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.2,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.2,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.2,
+          "tau_human": 0.01
+        }
+      },
+      "opus_8k": {
+        "1.5": {
+          "tau_clone": 0.4,
+          "tau_human": 0.013888888888888888
+        },
+        "2.0": {
+          "tau_clone": 0.4,
+          "tau_human": 0.013888888888888888
+        },
+        "3.0": {
+          "tau_clone": 0.4,
+          "tau_human": 0.013888888888888888
+        },
+        "4.0": {
+          "tau_clone": 0.4,
+          "tau_human": 0.013888888888888888
+        }
+      },
+      "g723_1_6k3": {
+        "1.5": {
+          "tau_clone": 0.5714285714285714,
+          "tau_human": 0.013888888888888888
+        },
+        "2.0": {
+          "tau_clone": 0.5714285714285714,
+          "tau_human": 0.013888888888888888
+        },
+        "3.0": {
+          "tau_clone": 0.5714285714285714,
+          "tau_human": 0.013888888888888888
+        },
+        "4.0": {
+          "tau_clone": 0.5714285714285714,
+          "tau_human": 0.013888888888888888
+        }
+      }
+    },
+    "fallback_channel": "g723_1_6k3",
+    "n_train_rows": 59941
+  },
+  "generator_matrix": {
+    "xtts_v2": {
+      "trained_on": [
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.01348625217866851,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.05896550954020657,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.08661417322834646,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.06482939632545931,
+          "auroc": 0.991732283464567,
+          "ece": 0.6445775783222768,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.9606299212598425,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.050156428142685686,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.07086614173228346,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.016207349081364855,
+          "auroc": 0.9994750656167979,
+          "ece": 0.20557735432183827,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.30708661417322836,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.04862204724409451,
+          "auroc": 0.9880577427821522,
+          "ece": 0.6540742976078446,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.016207349081364855,
+          "auroc": 0.9993438320209974,
+          "ece": 0.4169082011548969,
+          "n_bona": 127,
+          "n_spoof": 60,
+          "fpr_at_p50": 0.6220472440944882,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "freevc24": {
+      "trained_on": [
+        "xtts_v2",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.014454846165409527,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.06772118006489013,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.11023622047244094,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.07331185874492963,
+          "auroc": 0.9770937723693629,
+          "ece": 0.6187567465586042,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.9448818897637795,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.011512765449773317,
+          "auroc": 0.9997613934621808,
+          "ece": 0.051512101613855416,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.07874015748031496,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.04241231209735145,
+          "auroc": 0.9935576234788833,
+          "ece": 0.20426411753569143,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.33070866141732286,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.046349319971367195,
+          "auroc": 0.9883082796468624,
+          "ece": 0.6321224762482553,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.4298717869363697,
+          "n_bona": 127,
+          "n_spoof": 66,
+          "fpr_at_p50": 0.6929133858267716,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "encodec": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.2440944881889764,
+          "auroc": 0.8270196540393082,
+          "ece": 0.47299214559412506,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.0,
+          "tpr_at_p50": 0.023622047244094488
+        },
+        "opus_24k": {
+          "eer": 0.30708661417322836,
+          "auroc": 0.7621055242110484,
+          "ece": 0.4592584130105194,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.007874015748031496,
+          "tpr_at_p50": 0.06299212598425197
+        },
+        "opus_8k": {
+          "eer": 0.3464566929133859,
+          "auroc": 0.7150474300948602,
+          "ece": 0.4595899363356988,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 0.06299212598425197
+        },
+        "g722_64k": {
+          "eer": 0.2913385826771654,
+          "auroc": 0.8028396056792114,
+          "ece": 0.4576608642529949,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.0,
+          "tpr_at_p50": 0.047244094488188976
+        },
+        "g726_32k": {
+          "eer": 0.2913385826771654,
+          "auroc": 0.7549135098270197,
+          "ece": 0.4566128431492721,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.007874015748031496,
+          "tpr_at_p50": 0.07086614173228346
+        },
+        "g723_1_6k3": {
+          "eer": 0.3700787401574803,
+          "auroc": 0.6989273978547957,
+          "ece": 0.4257064655281284,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.03937007874015748,
+          "tpr_at_p50": 0.13385826771653545
+        },
+        "speex_wb_q4": {
+          "eer": 0.3779527559055118,
+          "auroc": 0.6998573997147994,
+          "ece": 0.4684737102482281,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.007874015748031496,
+          "tpr_at_p50": 0.047244094488188976
+        }
+      },
+      "clean_eer": 0.2440944881889764
+    },
+    "mac_say": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.011148275698790396,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.05221315540837516,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.09448818897637795,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.5683206899489106,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.9448818897637795,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.04142464660942641,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.06299212598425197,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.1652288449696758,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.25196850393700787,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.5802741900834875,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.9763779527559056,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.3573308719083089,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.5905511811023622,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "mms_vits": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "kokoro",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.007874015748031489,
+          "auroc": 0.9998759997519995,
+          "ece": 0.006981063641341297,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.007874015748031489,
+          "auroc": 0.9998139996279992,
+          "ece": 0.03107683463638744,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.06299212598425197,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.12598425196850394,
+          "auroc": 0.9296918593837187,
+          "ece": 0.4665599230959124,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.9606299212598425,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.015748031496062978,
+          "auroc": 0.9993799987599976,
+          "ece": 0.025317742276441027,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.03937007874015748,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.05511811023622048,
+          "auroc": 0.9884059768119536,
+          "ece": 0.11622362807011061,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.2440944881889764,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.11811023622047245,
+          "auroc": 0.9487258974517949,
+          "ece": 0.4739530584166601,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.9763779527559056,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.015748031496062978,
+          "auroc": 0.9966519933039866,
+          "ece": 0.2659810803072741,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.5433070866141733,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.007874015748031489
+    },
+    "kokoro": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "espeak_ng",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.015118608909126583,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.07174691310927664,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.07874015748031496,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.07425379967039004,
+          "auroc": 0.943416956601355,
+          "ece": 0.7092411670977827,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.9606299212598425,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.05276937690655613,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.05511811023622047,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.0429408533235671,
+          "auroc": 0.9926753341878777,
+          "ece": 0.22746843564310976,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.31496062992125984,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.06637978392235855,
+          "auroc": 0.9787584691448453,
+          "ece": 0.7207375978913061,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.019501922724775703,
+          "auroc": 0.9987181834828787,
+          "ece": 0.45850868718647697,
+          "n_bona": 127,
+          "n_spoof": 43,
+          "fpr_at_p50": 0.6299212598425197,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "espeak_ng": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "piper",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.00964403988728222,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.04369889974402937,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.10236220472440945,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.47005013144167984,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.9606299212598425,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.03298462530306327,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.05511811023622047,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.14669295121127793,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.30708661417322836,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.47879144815304636,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.30197701971135404,
+          "n_bona": 127,
+          "n_spoof": 127,
+          "fpr_at_p50": 0.6141732283464567,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "piper": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "chatterbox"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.011259210535045666,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 1.0
+        },
+        "opus_24k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.05511606408609359,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.10236220472440945,
+          "tpr_at_p50": 1.0
+        },
+        "opus_8k": {
+          "eer": 0.05804685999615904,
+          "auroc": 0.9890531976185903,
+          "ece": 0.5720123223987137,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.9606299212598425,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.04551273423221126,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.06299212598425197,
+          "tpr_at_p50": 1.0
+        },
+        "g726_32k": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.17418547714893706,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.29133858267716534,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.013971576723641257,
+          "auroc": 0.9997119262531208,
+          "ece": 0.5824940956127663,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.9763779527559056,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.0,
+          "auroc": 1.0,
+          "ece": 0.36666337297352597,
+          "n_bona": 127,
+          "n_spoof": 82,
+          "fpr_at_p50": 0.5984251968503937,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.0
+    },
+    "chatterbox": {
+      "trained_on": [
+        "xtts_v2",
+        "freevc24",
+        "encodec",
+        "mac_say",
+        "mms_vits",
+        "kokoro",
+        "espeak_ng",
+        "piper"
+      ],
+      "trained_on_conditions": [
+        "clean"
+      ],
+      "per_condition": {
+        "clean": {
+          "eer": 0.13214652516261555,
+          "auroc": 0.9534406025333789,
+          "ece": 0.07836978492438308,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.015748031496062992,
+          "tpr_at_p50": 0.5217391304347826
+        },
+        "opus_24k": {
+          "eer": 0.13214652516261555,
+          "auroc": 0.9493324204039713,
+          "ece": 0.06475090092314148,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.047244094488188976,
+          "tpr_at_p50": 0.6956521739130435
+        },
+        "opus_8k": {
+          "eer": 0.2642930503252311,
+          "auroc": 0.7945908935296131,
+          "ece": 0.804734374015629,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "g722_64k": {
+          "eer": 0.09465936323176996,
+          "auroc": 0.9589181787059227,
+          "ece": 0.052212761084376405,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.047244094488188976,
+          "tpr_at_p50": 0.6956521739130435
+        },
+        "g726_32k": {
+          "eer": 0.09072235535775422,
+          "auroc": 0.952413557001027,
+          "ece": 0.22097407939422264,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.2440944881889764,
+          "tpr_at_p50": 1.0
+        },
+        "g723_1_6k3": {
+          "eer": 0.1735706949674769,
+          "auroc": 0.8767545361177679,
+          "ece": 0.8141486098911129,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.984251968503937,
+          "tpr_at_p50": 1.0
+        },
+        "speex_wb_q4": {
+          "eer": 0.21893187264635397,
+          "auroc": 0.8490243067442657,
+          "ece": 0.4915537070527181,
+          "n_bona": 127,
+          "n_spoof": 23,
+          "fpr_at_p50": 0.5984251968503937,
+          "tpr_at_p50": 1.0
+        }
+      },
+      "clean_eer": 0.13214652516261555
+    }
+  },
+  "calibration": {
+    "seen_generators": {
+      "raw_sigmoid": {
+        "ece": 0.007769833852318017,
+        "fpr50": 0.015748031496062992
+      },
+      "platt": {
+        "ece": 0.003123957875302869
+      },
+      "isotonic": {
+        "ece": 0.0107652306453014
+      },
+      "n": 841
+    },
+    "unseen_cloner": {
+      "raw_sigmoid": {
+        "ece": 0.04860517486498187,
+        "fpr50": 0.015748031496062992
+      },
+      "platt": {
+        "ece": 0.07588096671263549
+      },
+      "isotonic": {
+        "ece": 0.07836978492438308
+      },
+      "n": 150
+    }
+  },
+  "streaming": {
+    "prefixes_s": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0
+    ],
+    "per_prefix": {
+      "0.5": {
+        "seen": {
+          "eer": 0.015577096980524466,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.34320438206093806,
+          "n": 150
+        }
+      },
+      "1.0": {
+        "seen": {
+          "eer": 0.00813868854628464,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.29390619650804517,
+          "n": 150
+        }
+      },
+      "1.5": {
+        "seen": {
+          "eer": 0.0007002801120448154,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.14002054091064706,
+          "n": 150
+        }
+      },
+      "2.0": {
+        "seen": {
+          "eer": 0.006037848210150194,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.09072235535775422,
+          "n": 150
+        }
+      },
+      "2.5": {
+        "seen": {
+          "eer": 0.0,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.13214652516261555,
+          "n": 150
+        }
+      },
+      "3.0": {
+        "seen": {
+          "eer": 0.0,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.13214652516261555,
+          "n": 150
+        }
+      },
+      "3.5": {
+        "seen": {
+          "eer": 0.0,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.09072235535775422,
+          "n": 150
+        }
+      },
+      "4.0": {
+        "seen": {
+          "eer": 0.0,
+          "n": 841
+        },
+        "unseen": {
+          "eer": 0.09072235535775422,
+          "n": 150
+        }
+      }
+    },
+    "gate_replay": {
+      "seen": {
+        "n_clips": 841,
+        "n_genuine": 127,
+        "n_spoof": 714,
+        "coverage": 1.0,
+        "coverage_genuine": 1.0,
+        "coverage_spoof": 1.0,
+        "n_committed": 841,
+        "n_committed_genuine": 127,
+        "n_committed_spoof": 714,
+        "committed_error": 0.0,
+        "median_time_to_decision_s": 1.5,
+        "false_positive_rate": 0.0,
+        "n_false_positive": 0,
+        "deferred": 0,
+        "n_prefixes_available": 8
+      },
+      "unseen": {
+        "n_clips": 150,
+        "n_genuine": 127,
+        "n_spoof": 23,
+        "coverage": 0.98,
+        "coverage_genuine": 1.0,
+        "coverage_spoof": 0.8695652173913043,
+        "n_committed": 147,
+        "n_committed_genuine": 127,
+        "n_committed_spoof": 20,
+        "committed_error": 0.11564625850340138,
+        "median_time_to_decision_s": 1.5,
+        "false_positive_rate": 0.0,
+        "n_false_positive": 0,
+        "deferred": 3,
+        "n_prefixes_available": 8
+      }
+    },
+    "gate_replay_scope": "clean channel only",
+    "gate_replay_by_channel": {
+      "clean": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 1.0,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 1.0,
+          "n_committed": 841,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 714,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 1.5,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 0,
+          "n_prefixes_available": 8
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.98,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.8695652173913043,
+          "n_committed": 147,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 20,
+          "committed_error": 0.11564625850340138,
+          "median_time_to_decision_s": 1.5,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 3,
+          "n_prefixes_available": 8
+        }
+      },
+      "g722_64k": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.30083234244946494,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.17647058823529413,
+          "n_committed": 253,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 126,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 588,
+          "n_prefixes_available": 4
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.8466666666666667,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.0,
+          "n_committed": 127,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 0,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 23,
+          "n_prefixes_available": 4
+        }
+      },
+      "g726_32k": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.30083234244946494,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.17647058823529413,
+          "n_committed": 253,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 126,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 588,
+          "n_prefixes_available": 4
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.8466666666666667,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.0,
+          "n_committed": 127,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 0,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 23,
+          "n_prefixes_available": 4
+        }
+      },
+      "opus_24k": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.30083234244946494,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.17647058823529413,
+          "n_committed": 253,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 126,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 1.5,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 588,
+          "n_prefixes_available": 8
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.8466666666666667,
+          "coverage_genuine": 1.0,
+          "coverage_spoof": 0.0,
+          "n_committed": 127,
+          "n_committed_genuine": 127,
+          "n_committed_spoof": 0,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 1.5,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 23,
+          "n_prefixes_available": 8
+        }
+      },
+      "speex_wb_q4": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.2984542211652794,
+          "coverage_genuine": 0.9921259842519685,
+          "coverage_spoof": 0.17507002801120447,
+          "n_committed": 251,
+          "n_committed_genuine": 126,
+          "n_committed_spoof": 125,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 590,
+          "n_prefixes_available": 4
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.84,
+          "coverage_genuine": 0.9921259842519685,
+          "coverage_spoof": 0.0,
+          "n_committed": 126,
+          "n_committed_genuine": 126,
+          "n_committed_spoof": 0,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 24,
+          "n_prefixes_available": 4
+        }
+      },
+      "opus_8k": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.291319857312723,
+          "coverage_genuine": 0.937007874015748,
+          "coverage_spoof": 0.17647058823529413,
+          "n_committed": 245,
+          "n_committed_genuine": 119,
+          "n_committed_spoof": 126,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 596,
+          "n_prefixes_available": 4
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.7933333333333333,
+          "coverage_genuine": 0.937007874015748,
+          "coverage_spoof": 0.0,
+          "n_committed": 119,
+          "n_committed_genuine": 119,
+          "n_committed_spoof": 0,
+          "committed_error": 0.0,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.0,
+          "n_false_positive": 0,
+          "deferred": 31,
+          "n_prefixes_available": 4
+        }
+      },
+      "g723_1_6k3": {
+        "seen": {
+          "n_clips": 841,
+          "n_genuine": 127,
+          "n_spoof": 714,
+          "coverage": 0.29607609988109396,
+          "coverage_genuine": 0.9763779527559056,
+          "coverage_spoof": 0.17507002801120447,
+          "n_committed": 249,
+          "n_committed_genuine": 124,
+          "n_committed_spoof": 125,
+          "committed_error": 0.004016064257028162,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.007874015748031496,
+          "n_false_positive": 1,
+          "deferred": 592,
+          "n_prefixes_available": 4
+        },
+        "unseen": {
+          "n_clips": 150,
+          "n_genuine": 127,
+          "n_spoof": 23,
+          "coverage": 0.8266666666666667,
+          "coverage_genuine": 0.9763779527559056,
+          "coverage_spoof": 0.0,
+          "n_committed": 124,
+          "n_committed_genuine": 124,
+          "n_committed_spoof": 0,
+          "committed_error": 0.008064516129032251,
+          "median_time_to_decision_s": 3.0,
+          "false_positive_rate": 0.007874015748031496,
+          "n_false_positive": 1,
+          "deferred": 26,
+          "n_prefixes_available": 4
+        }
+      }
+    },
+    "false_positive_rate_by_channel": {
+      "clean": 0.0,
+      "g722_64k": 0.0,
+      "g726_32k": 0.0,
+      "opus_24k": 0.0,
+      "speex_wb_q4": 0.0,
+      "opus_8k": 0.0,
+      "g723_1_6k3": 0.007874015748031496
+    },
+    "worst_channel": "g723_1_6k3",
+    "worst_channel_fpr": 0.007874015748031496,
+    "band": {
+      "0.5": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "1.0": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "1.5": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "2.0": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "2.5": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "3.0": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "3.5": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      },
+      "4.0": {
+        "tau_clone": 0.014925373134328358,
+        "tau_human": 0.01
+      }
+    },
+    "band_scope": "clean channel; band_by_channel carries the rest",
+    "band_by_channel": {
+      "clean": {
+        "0.5": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "1.0": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "1.5": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "2.5": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "3.5": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.014925373134328358,
+          "tau_human": 0.01
+        }
+      },
+      "g722_64k": {
+        "1.5": {
+          "tau_clone": 0.03571428571428571,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.03571428571428571,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.03571428571428571,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.03571428571428571,
+          "tau_human": 0.01
+        }
+      },
+      "g726_32k": {
+        "1.5": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        }
+      },
+      "opus_24k": {
+        "0.5": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "1.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "1.5": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "2.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "2.5": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "3.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "3.5": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        },
+        "4.0": {
+          "tau_clone": 0.021739130434782608,
+          "tau_human": 0.01
+        }
+      },
+      "speex_wb_q4": {
+        "1.5": {
+          "tau_clone": 0.16666666666666666,
+          "tau_human": 0.014925373134328358
+        },
+        "2.0": {
+          "tau_clone": 0.16666666666666666,
+          "tau_human": 0.014925373134328358
+        },
+        "3.0": {
+          "tau_clone": 0.16666666666666666,
+          "tau_human": 0.014925373134328358
+        },
+        "4.0": {
+          "tau_clone": 0.16666666666666666,
+          "tau_human": 0.014925373134328358
+        }
+      },
+      "opus_8k": {
+        "1.5": {
+          "tau_clone": 0.5,
+          "tau_human": 0.021739130434782608
+        },
+        "2.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.021739130434782608
+        },
+        "3.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.021739130434782608
+        },
+        "4.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.021739130434782608
+        }
+      },
+      "g723_1_6k3": {
+        "1.5": {
+          "tau_clone": 0.5,
+          "tau_human": 0.03571428571428571
+        },
+        "2.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.03571428571428571
+        },
+        "3.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.03571428571428571
+        },
+        "4.0": {
+          "tau_clone": 0.5,
+          "tau_human": 0.03571428571428571
+        }
+      }
+    },
+    "legacy_fixed_band": {
+      "tau_clone": 0.85,
+      "tau_human": 0.15
+    },
+    "min_commit_s": 1.5,
+    "fpr_budget": 0.02
+  },
+  "diversity_curve": {
+    "unseen": "chatterbox",
+    "order": [
+      "xtts_v2",
+      "freevc24",
+      "encodec",
+      "mac_say",
+      "mms_vits",
+      "kokoro",
+      "espeak_ng",
+      "piper"
+    ],
+    "curve": [
+      {
+        "k": 1,
+        "chronological": [
+          "xtts_v2"
+        ],
+        "eer_chronological": 0.04536117767887708,
+        "eer_mean": 0.18821832053601995,
+        "eer_min": 0.04536117767887708,
+        "eer_max": 0.3964395754878466,
+        "auroc_mean": 0.8632562234068567,
+        "n_subsets": 7
+      },
+      {
+        "k": 2,
+        "chronological": [
+          "xtts_v2",
+          "freevc24"
+        ],
+        "eer_chronological": 0.08284833960972272,
+        "eer_mean": 0.06959456154937156,
+        "eer_min": 0.03355015405682984,
+        "eer_max": 0.09072235535775422,
+        "auroc_mean": 0.9744216755514257,
+        "n_subsets": 7
+      },
+      {
+        "k": 3,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec"
+        ],
+        "eer_chronological": 0.14002054091064706,
+        "eer_mean": 0.1062258522032572,
+        "eer_min": 0.03355015405682984,
+        "eer_max": 0.1735706949674769,
+        "auroc_mean": 0.9569619015014429,
+        "n_subsets": 7
+      },
+      {
+        "k": 4,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say"
+        ],
+        "eer_chronological": 0.13214652516261555,
+        "eer_mean": 0.13045923607375165,
+        "eer_min": 0.04536117767887708,
+        "eer_max": 0.1656966792194454,
+        "auroc_mean": 0.9380838264782119,
+        "n_subsets": 7
+      },
+      {
+        "k": 5,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits"
+        ],
+        "eer_chronological": 0.1282095172885998,
+        "eer_mean": 0.10510099281068126,
+        "eer_min": 0.04536117767887708,
+        "eer_max": 0.13214652516261555,
+        "auroc_mean": 0.9619993153029783,
+        "n_subsets": 7
+      },
+      {
+        "k": 6,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro"
+        ],
+        "eer_chronological": 0.13214652516261555,
+        "eer_mean": 0.13750183400987923,
+        "eer_min": 0.1282095172885998,
+        "eer_max": 0.1656966792194454,
+        "auroc_mean": 0.9422898224678437,
+        "n_subsets": 7
+      },
+      {
+        "k": 7,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng"
+        ],
+        "eer_chronological": 0.13214652516261555,
+        "eer_mean": 0.11693646989778451,
+        "eer_min": 0.07891133173570697,
+        "eer_max": 0.13214652516261555,
+        "auroc_mean": 0.9631730816256664,
+        "n_subsets": 7
+      },
+      {
+        "k": 8,
+        "chronological": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "eer_chronological": 0.13214652516261555,
+        "eer_mean": 0.13214652516261552,
+        "eer_min": 0.13214652516261555,
+        "eer_max": 0.13214652516261555,
+        "auroc_mean": 0.953440602533379,
+        "n_subsets": 7
+      }
+    ]
+  },
+  "adaptation": [
+    {
+      "shots": 0,
+      "eer_unseen_heldout": 0.1875,
+      "eer_seen_test": 0.0,
+      "n_heldout_parents": 16
+    },
+    {
+      "shots": 3,
+      "eer_unseen_heldout": 0.0625,
+      "eer_seen_test": 0.0,
+      "n_heldout_parents": 16
+    },
+    {
+      "shots": 6,
+      "eer_unseen_heldout": 0.0625,
+      "eer_seen_test": 0.0,
+      "n_heldout_parents": 16
+    },
+    {
+      "shots": 12,
+      "eer_unseen_heldout": 0.0,
+      "eer_seen_test": 0.0,
+      "n_heldout_parents": 16
+    }
+  ],
+  "operating_point": {
+    "tau_clone": 0.013888888888888888,
+    "tau_human": 0.01,
+    "scope": "clean channel, 4.0 s prefix",
+    "per_generator": {
+      "human": {
+        "n": 510,
+        "called_synthetic": 0.00392156862745098,
+        "called_human": 0.996078431372549,
+        "deferred": 0.0
+      },
+      "xtts_v2": {
+        "n": 250,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "freevc24": {
+        "n": 250,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "encodec": {
+        "n": 510,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "mac_say": {
+        "n": 340,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "mms_vits": {
+        "n": 510,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "kokoro": {
+        "n": 170,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "espeak_ng": {
+        "n": 510,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "piper": {
+        "n": 340,
+        "called_synthetic": 1.0,
+        "called_human": 0.0,
+        "deferred": 0.0,
+        "eer": 0.0
+      },
+      "chatterbox": {
+        "n": 39,
+        "called_synthetic": 0.6923076923076923,
+        "called_human": 0.3076923076923077,
+        "deferred": 0.0,
+        "eer": 0.057013574660633504
+      }
+    },
+    "per_channel_genuine": {
+      "clean": {
+        "n": 510,
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01,
+        "called_synthetic": 0.00392156862745098,
+        "called_human": 0.996078431372549,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.0,
+        "deferred": 0.0
+      },
+      "g722_64k": {
+        "n": 510,
+        "tau_clone": 0.027777777777777776,
+        "tau_human": 0.01,
+        "called_synthetic": 0.013725490196078431,
+        "called_human": 0.9862745098039216,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.0,
+        "deferred": 0.0
+      },
+      "g726_32k": {
+        "n": 510,
+        "tau_clone": 0.027777777777777776,
+        "tau_human": 0.01,
+        "called_synthetic": 0.01568627450980392,
+        "called_human": 0.984313725490196,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.0,
+        "deferred": 1.1102230246251565e-16
+      },
+      "opus_24k": {
+        "n": 510,
+        "tau_clone": 0.013888888888888888,
+        "tau_human": 0.01,
+        "called_synthetic": 0.01568627450980392,
+        "called_human": 0.984313725490196,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.0,
+        "deferred": 1.1102230246251565e-16
+      },
+      "speex_wb_q4": {
+        "n": 510,
+        "tau_clone": 0.2,
+        "tau_human": 0.01,
+        "called_synthetic": 0.00392156862745098,
+        "called_human": 0.9235294117647059,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.00392156862745098,
+        "deferred": 0.0725490196078431
+      },
+      "opus_8k": {
+        "n": 510,
+        "tau_clone": 0.4,
+        "tau_human": 0.013888888888888888,
+        "called_synthetic": 0.011764705882352941,
+        "called_human": 0.8627450980392157,
+        "called_synthetic_at_legacy_band": 0.0,
+        "called_synthetic_at_p50": 0.00980392156862745,
+        "deferred": 0.12549019607843137
+      },
+      "g723_1_6k3": {
+        "n": 510,
+        "tau_clone": 0.5714285714285714,
+        "tau_human": 0.013888888888888888,
+        "called_synthetic": 0.00980392156862745,
+        "called_human": 0.7823529411764706,
+        "called_synthetic_at_legacy_band": 0.00392156862745098,
+        "called_synthetic_at_p50": 0.00980392156862745,
+        "deferred": 0.207843137254902
+      }
+    },
+    "worst_channel": "g726_32k",
+    "worst_channel_fpr": 0.01568627450980392,
+    "fpr_pooled_all_channels": 0.010644257703081233,
+    "headline": "On the unseen 2025 cloner the shipped band calls 69.2% synthetic, defers on 0.0% and waves 30.8% through, even though its ranking EER is 5.7%. Ranking transfers to a new generator; the absolute threshold does not. This is why a high-value action always requires the device factor."
+  },
+  "band_selection": {
+    "bar": {
+      "committed_error_max": 0.1,
+      "min_coverage": 0.4,
+      "source": "parent repo eval/BAR.md, not moved"
+    },
+    "selection_split": "calib",
+    "selection_uses": "bona fide speech only",
+    "reporting_split": "test",
+    "grid": [
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.05
+    ],
+    "sweep": [
+      {
+        "fpr_budget": 0.002,
+        "worst_channel": "g723_1_6k3",
+        "worst_channel_fpr": 0.007874015748031496,
+        "false_positive_rate_by_channel": {
+          "clean": 0.0,
+          "g722_64k": 0.0,
+          "g726_32k": 0.0,
+          "opus_24k": 0.0,
+          "speex_wb_q4": 0.0,
+          "opus_8k": 0.0,
+          "g723_1_6k3": 0.007874015748031496
+        },
+        "clean": {
+          "coverage": 1.0,
+          "committed_error_seen": 0.0,
+          "committed_error_unseen": 0.12244897959183676
+        },
+        "band_at_clip_s": {
+          "clean": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "g722_64k": {
+            "tau_clone": 0.23076923076923078,
+            "tau_human": 0.01
+          },
+          "g726_32k": {
+            "tau_clone": 0.35294117647058826,
+            "tau_human": 0.01
+          },
+          "opus_24k": {
+            "tau_clone": 0.35294117647058826,
+            "tau_human": 0.01
+          },
+          "speex_wb_q4": {
+            "tau_clone": 0.5,
+            "tau_human": 0.01
+          },
+          "opus_8k": {
+            "tau_clone": 0.961038961038961,
+            "tau_human": 0.013513513513513514
+          },
+          "g723_1_6k3": {
+            "tau_clone": 0.99,
+            "tau_human": 0.0196078431372549
+          }
+        }
+      },
+      {
+        "fpr_budget": 0.005,
+        "worst_channel": "clean",
+        "worst_channel_fpr": 0.007874015748031496,
+        "false_positive_rate_by_channel": {
+          "clean": 0.007874015748031496,
+          "g722_64k": 0.0,
+          "g726_32k": 0.0,
+          "opus_24k": 0.0,
+          "speex_wb_q4": 0.0,
+          "opus_8k": 0.0,
+          "g723_1_6k3": 0.007874015748031496
+        },
+        "clean": {
+          "coverage": 1.0,
+          "committed_error_seen": 0.0011890606420927874,
+          "committed_error_unseen": 0.12925170068027214
+        },
+        "band_at_clip_s": {
+          "clean": {
+            "tau_clone": 0.0196078431372549,
+            "tau_human": 0.01
+          },
+          "g722_64k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "g726_32k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "opus_24k": {
+            "tau_clone": 0.23076923076923078,
+            "tau_human": 0.01
+          },
+          "speex_wb_q4": {
+            "tau_clone": 0.35294117647058826,
+            "tau_human": 0.01
+          },
+          "opus_8k": {
+            "tau_clone": 0.6666666666666666,
+            "tau_human": 0.013513513513513514
+          },
+          "g723_1_6k3": {
+            "tau_clone": 0.961038961038961,
+            "tau_human": 0.0196078431372549
+          }
+        }
+      },
+      {
+        "fpr_budget": 0.01,
+        "worst_channel": "clean",
+        "worst_channel_fpr": 0.007874015748031496,
+        "false_positive_rate_by_channel": {
+          "clean": 0.007874015748031496,
+          "g722_64k": 0.0,
+          "g726_32k": 0.0,
+          "opus_24k": 0.0,
+          "speex_wb_q4": 0.0,
+          "opus_8k": 0.0,
+          "g723_1_6k3": 0.007874015748031496
+        },
+        "clean": {
+          "coverage": 1.0,
+          "committed_error_seen": 0.0011890606420927874,
+          "committed_error_unseen": 0.12925170068027214
+        },
+        "band_at_clip_s": {
+          "clean": {
+            "tau_clone": 0.0196078431372549,
+            "tau_human": 0.01
+          },
+          "g722_64k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "g726_32k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "opus_24k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "speex_wb_q4": {
+            "tau_clone": 0.23076923076923078,
+            "tau_human": 0.01
+          },
+          "opus_8k": {
+            "tau_clone": 0.5,
+            "tau_human": 0.013513513513513514
+          },
+          "g723_1_6k3": {
+            "tau_clone": 0.75,
+            "tau_human": 0.0196078431372549
+          }
+        }
+      },
+      {
+        "fpr_budget": 0.02,
+        "worst_channel": "clean",
+        "worst_channel_fpr": 0.007874015748031496,
+        "false_positive_rate_by_channel": {
+          "clean": 0.007874015748031496,
+          "g722_64k": 0.0,
+          "g726_32k": 0.0,
+          "opus_24k": 0.0,
+          "speex_wb_q4": 0.0,
+          "opus_8k": 0.0,
+          "g723_1_6k3": 0.007874015748031496
+        },
+        "clean": {
+          "coverage": 1.0,
+          "committed_error_seen": 0.0011890606420927874,
+          "committed_error_unseen": 0.12925170068027214
+        },
+        "band_at_clip_s": {
+          "clean": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "g722_64k": {
+            "tau_clone": 0.0196078431372549,
+            "tau_human": 0.01
+          },
+          "g726_32k": {
+            "tau_clone": 0.0196078431372549,
+            "tau_human": 0.01
+          },
+          "opus_24k": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "speex_wb_q4": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.01
+          },
+          "opus_8k": {
+            "tau_clone": 0.35294117647058826,
+            "tau_human": 0.013513513513513514
+          },
+          "g723_1_6k3": {
+            "tau_clone": 0.5,
+            "tau_human": 0.0196078431372549
+          }
+        }
+      },
+      {
+        "fpr_budget": 0.05,
+        "worst_channel": "clean",
+        "worst_channel_fpr": 0.007874015748031496,
+        "false_positive_rate_by_channel": {
+          "clean": 0.007874015748031496,
+          "g722_64k": 0.0,
+          "g726_32k": 0.0,
+          "opus_24k": 0.0,
+          "speex_wb_q4": 0.0,
+          "opus_8k": 0.0,
+          "g723_1_6k3": 0.007874015748031496
+        },
+        "clean": {
+          "coverage": 1.0,
+          "committed_error_seen": 0.0011890606420927874,
+          "committed_error_unseen": 0.12925170068027214
+        },
+        "band_at_clip_s": {
+          "clean": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "g722_64k": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "g726_32k": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "opus_24k": {
+            "tau_clone": 0.013513513513513514,
+            "tau_human": 0.01
+          },
+          "speex_wb_q4": {
+            "tau_clone": 0.0196078431372549,
+            "tau_human": 0.01
+          },
+          "opus_8k": {
+            "tau_clone": 0.16666666666666666,
+            "tau_human": 0.013513513513513514
+          },
+          "g723_1_6k3": {
+            "tau_clone": 0.23076923076923078,
+            "tau_human": 0.0196078431372549
+          }
+        }
+      }
+    ],
+    "worst_channel_fpr_is_flat": true,
+    "selection_note": "Every budget from 0.002 to 0.05 clears the bar and every one of them measures the same worst-channel false-positive rate, 0.79% on g723_1_6k3, because the isotonic calibrator emits a handful of discrete steps and the whole grid lands between the same two of them on the test split. The budget is therefore NOT identified by this sweep. Pramaan ships 0.02, which sits inside that flat region; it is a declared design choice, not a fit, and the sweep is published so a reader can see it was not tuned to a result.",
+    "selected_fpr_budget": null,
+    "shipped_fpr_budget": 0.02,
+    "head_trained_on": "train split only, so the selection never sees test clips",
+    "legacy_fixed_band": {
+      "tau_clone": 0.85,
+      "tau_human": 0.15
+    }
+  },
+  "generator_matrix_note": "Each row trains on CLEAN audio only and is then scored through every codec, so the per-condition fpr_at_p50 here measures a clean-trained head meeting an unseen channel at a fixed 0.5 threshold. It is a channel-shift stress test, not the shipped system: the shipped head in `ship` trains on all seven conditions and decides at the per-channel band in `streaming.band_by_channel`. Compare against operating_point.per_channel_genuine, never against this row.",
+  "confidence": {
+    "method": "cluster bootstrap over parent recordings for EERs; Wilson score intervals for rates; 95% throughout",
+    "n_boot": 2000,
+    "seed": 0,
+    "unseen_cloner_eer_leave_one_out": {
+      "eer": 0.13214652516261555,
+      "lo": 0.04677881173944165,
+      "hi": 0.218938636790317,
+      "n_boot": 2000,
+      "n_units": 127,
+      "n_clips": 150,
+      "n_bona": 127,
+      "n_spoof": 23,
+      "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile",
+      "protocol": "generator_matrix.chatterbox.per_condition.clean, the README headline"
+    },
+    "unseen_cloner_eer_by_channel": {
+      "clean": {
+        "eer": 0.13214652516261555,
+        "lo": 0.04677881173944165,
+        "hi": 0.218938636790317,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "g722_64k": {
+        "eer": 0.09465936323176996,
+        "lo": 0.04839238845144355,
+        "hi": 0.15768752590136761,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "g726_32k": {
+        "eer": 0.09072235535775422,
+        "lo": 0.04536117767887708,
+        "hi": 0.1814602720114531,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "opus_24k": {
+        "eer": 0.13214652516261555,
+        "lo": 0.05530028318828569,
+        "hi": 0.1984274682010902,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "speex_wb_q4": {
+        "eer": 0.21893187264635397,
+        "lo": 0.12296271421954609,
+        "hi": 0.32213160854893136,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "opus_8k": {
+        "eer": 0.2642930503252311,
+        "lo": 0.18933428775948458,
+        "hi": 0.3456796208195113,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      },
+      "g723_1_6k3": {
+        "eer": 0.1735706949674769,
+        "lo": 0.11067366579177605,
+        "hi": 0.2470472440944882,
+        "n_boot": 2000,
+        "n_units": 127,
+        "n_clips": 150,
+        "n_bona": 127,
+        "n_spoof": 23,
+        "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+      }
+    },
+    "unseen_cloner_eer_shipped_head_all_clips": {
+      "eer": 0.057013574660633504,
+      "lo": 0.030179352146263886,
+      "hi": 0.08823529411764708,
+      "n_boot": 2000,
+      "n_units": 510,
+      "n_clips": 549,
+      "n_bona": 510,
+      "n_spoof": 39,
+      "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile",
+      "protocol": "operating_point.per_generator.chatterbox.eer, the shipped head at 4.0 s"
+    },
+    "clip_count_reconciliation": {
+      "n_chatterbox_total": 39,
+      "n_chatterbox_scored_in_headline": 23,
+      "resolved": "Both counts are correct and they belong to different protocols. 39 is every Chatterbox clip in the corpus (dataset.by_generator.chatterbox), and the shipped head never trains on any of them, so all 39 are held out at the operating point. 23 is the subset that falls in the 25% test split of parent recordings, which is what the leave-one-generator-out headline is scored on, because that protocol also needs its genuine side held out from the head's training split. The headline EER is an EER over 23 clones and 127 genuine recordings, and that is the pair of counts any interval on it must use.",
+      "headline_n_bona": 127,
+      "source_headline": "generator_matrix.chatterbox.per_condition.clean",
+      "source_total": "dataset.by_generator.chatterbox and operating_point.per_generator.chatterbox"
+    },
+    "gate_replay_by_channel": {
+      "clean": {
+        "seen": {
+          "coverage": {
+            "rate": 1.0,
+            "lo": 0.9954530417741851,
+            "hi": 1.0,
+            "k": 841,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 4.336808689942018e-19,
+            "hi": 0.004546958225814794,
+            "k": 0,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.98,
+            "lo": 0.9428533167296139,
+            "hi": 0.9931752486770326,
+            "k": 147,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.11564625850340136,
+            "lo": 0.07346952865890682,
+            "hi": 0.17739955678050429,
+            "k": 17,
+            "n": 147,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "g722_64k": {
+        "seen": {
+          "coverage": {
+            "rate": 0.30083234244946494,
+            "lo": 0.27079942894891207,
+            "hi": 0.3326764699876491,
+            "k": 253,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.014956537150709458,
+            "k": 0,
+            "n": 253,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.8466666666666667,
+            "lo": 0.7804201682766676,
+            "hi": 0.8956004622947993,
+            "k": 127,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "g726_32k": {
+        "seen": {
+          "coverage": {
+            "rate": 0.30083234244946494,
+            "lo": 0.27079942894891207,
+            "hi": 0.3326764699876491,
+            "k": 253,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.014956537150709458,
+            "k": 0,
+            "n": 253,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.8466666666666667,
+            "lo": 0.7804201682766676,
+            "hi": 0.8956004622947993,
+            "k": 127,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "opus_24k": {
+        "seen": {
+          "coverage": {
+            "rate": 0.30083234244946494,
+            "lo": 0.27079942894891207,
+            "hi": 0.3326764699876491,
+            "k": 253,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.014956537150709458,
+            "k": 0,
+            "n": 253,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.8466666666666667,
+            "lo": 0.7804201682766676,
+            "hi": 0.8956004622947993,
+            "k": 127,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "speex_wb_q4": {
+        "seen": {
+          "coverage": {
+            "rate": 0.2984542211652794,
+            "lo": 0.268501907186065,
+            "hi": 0.3302393756183954,
+            "k": 251,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 8.673617379884035e-19,
+            "hi": 0.015073916302594106,
+            "k": 0,
+            "n": 251,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.84,
+            "lo": 0.7729603179581628,
+            "hi": 0.890059915871545,
+            "k": 126,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 1.734723475976807e-18,
+            "hi": 0.02958576448219845,
+            "k": 0,
+            "n": 126,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "opus_8k": {
+        "seen": {
+          "coverage": {
+            "rate": 0.291319857312723,
+            "lo": 0.26161530509337444,
+            "hi": 0.32292212931478376,
+            "k": 245,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.015437374619565052,
+            "k": 0,
+            "n": 245,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.7933333333333333,
+            "lo": 0.7216063981873552,
+            "hi": 0.8504110584500398,
+            "k": 119,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.031271680241939506,
+            "k": 0,
+            "n": 119,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.0,
+            "lo": 0.0,
+            "hi": 0.029359645293763368,
+            "k": 0,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      },
+      "g723_1_6k3": {
+        "seen": {
+          "coverage": {
+            "rate": 0.29607609988109396,
+            "lo": 0.2662053747049315,
+            "hi": 0.3278012919674282,
+            "k": 249,
+            "n": 841,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.004016064257028112,
+            "lo": 0.0007092860826813513,
+            "hi": 0.022393961493645413,
+            "k": 1,
+            "n": 249,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.007874015748031496,
+            "lo": 0.0013913120414446208,
+            "hi": 0.043254008129582314,
+            "k": 1,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        },
+        "unseen": {
+          "coverage": {
+            "rate": 0.8266666666666667,
+            "lo": 0.7581400726100628,
+            "hi": 0.8788793677361272,
+            "k": 124,
+            "n": 150,
+            "method": "Wilson score, 95%"
+          },
+          "committed_error": {
+            "rate": 0.008064516129032258,
+            "lo": 0.0014250064581251692,
+            "hi": 0.04426798605447708,
+            "k": 1,
+            "n": 124,
+            "method": "Wilson score, 95%"
+          },
+          "false_positive_rate": {
+            "rate": 0.007874015748031496,
+            "lo": 0.0013913120414446208,
+            "hi": 0.043254008129582314,
+            "k": 1,
+            "n": 127,
+            "method": "Wilson score, 95%"
+          }
+        }
+      }
+    },
+    "operating_point_unseen": {
+      "called_synthetic": {
+        "rate": 0.6923076923076923,
+        "lo": 0.5357874562585069,
+        "hi": 0.8143406769308886,
+        "k": 27,
+        "n": 39,
+        "method": "Wilson score, 95%"
+      },
+      "called_human": {
+        "rate": 0.3076923076923077,
+        "lo": 0.18565932306911137,
+        "hi": 0.4642125437414931,
+        "k": 12,
+        "n": 39,
+        "method": "Wilson score, 95%"
+      }
+    },
+    "operating_point_genuine_by_channel": {
+      "clean": {
+        "rate": 0.00392156862745098,
+        "lo": 0.0010760951467521434,
+        "hi": 0.014184368340742382,
+        "k": 2,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "g722_64k": {
+        "rate": 0.013725490196078431,
+        "lo": 0.0066641893676831244,
+        "hi": 0.028057529782113875,
+        "k": 7,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "g726_32k": {
+        "rate": 0.01568627450980392,
+        "lo": 0.007969437066686716,
+        "hi": 0.030644533215570785,
+        "k": 8,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "opus_24k": {
+        "rate": 0.01568627450980392,
+        "lo": 0.007969437066686716,
+        "hi": 0.030644533215570785,
+        "k": 8,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "speex_wb_q4": {
+        "rate": 0.00392156862745098,
+        "lo": 0.0010760951467521434,
+        "hi": 0.014184368340742382,
+        "k": 2,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "opus_8k": {
+        "rate": 0.011764705882352941,
+        "lo": 0.005402718468476807,
+        "hi": 0.0254267495488597,
+        "k": 6,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      },
+      "g723_1_6k3": {
+        "rate": 0.00980392156862745,
+        "lo": 0.004194714907055891,
+        "hi": 0.02274250197782012,
+        "k": 5,
+        "n": 510,
+        "method": "Wilson score, 95%"
+      }
+    },
+    "streaming_leave_one_out_clean": {
+      "xtts_v2": {
+        "coverage": {
+          "rate": 0.8663101604278075,
+          "lo": 0.8100935388653695,
+          "hi": 0.9077798249550094,
+          "k": 162,
+          "n": 187,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.06172839506172839,
+          "lo": 0.03387184269726917,
+          "hi": 0.10988870421441249,
+          "k": 10,
+          "n": 162,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "freevc24": {
+        "coverage": {
+          "rate": 1.0,
+          "lo": 0.9804845033982735,
+          "hi": 0.9999999999999999,
+          "k": 193,
+          "n": 193,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.0051813471502590676,
+          "lo": 0.0009152212874379111,
+          "hi": 0.028760736489400144,
+          "k": 1,
+          "n": 193,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.007874015748031496,
+          "lo": 0.0013913120414446208,
+          "hi": 0.043254008129582314,
+          "k": 1,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "encodec": {
+        "coverage": {
+          "rate": 0.968503937007874,
+          "lo": 0.939092100987337,
+          "hi": 0.983955732703008,
+          "k": 246,
+          "n": 254,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.45121951219512196,
+          "lo": 0.39026158126663146,
+          "hi": 0.5136775002881866,
+          "k": 111,
+          "n": 246,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "mac_say": {
+        "coverage": {
+          "rate": 1.0,
+          "lo": 0.9819515481524193,
+          "hi": 1.0,
+          "k": 209,
+          "n": 209,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.018048451847580686,
+          "k": 0,
+          "n": 209,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "mms_vits": {
+        "coverage": {
+          "rate": 0.984251968503937,
+          "lo": 0.9602153534965894,
+          "hi": 0.9938592981329268,
+          "k": 250,
+          "n": 254,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.04,
+          "lo": 0.021869911954542545,
+          "hi": 0.07205272358126646,
+          "k": 10,
+          "n": 250,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.03937007874015748,
+          "lo": 0.016931797475218995,
+          "hi": 0.08885622220486222,
+          "k": 5,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "kokoro": {
+        "coverage": {
+          "rate": 1.0,
+          "lo": 0.9779025161963444,
+          "hi": 0.9999999999999998,
+          "k": 170,
+          "n": 170,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.022097483803655452,
+          "k": 0,
+          "n": 170,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "espeak_ng": {
+        "coverage": {
+          "rate": 1.0,
+          "lo": 0.9851014695686876,
+          "hi": 1.0,
+          "k": 254,
+          "n": 254,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.01489853043131252,
+          "k": 0,
+          "n": 254,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "piper": {
+        "coverage": {
+          "rate": 1.0,
+          "lo": 0.9819515481524193,
+          "hi": 1.0,
+          "k": 209,
+          "n": 209,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.018048451847580686,
+          "k": 0,
+          "n": 209,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      },
+      "chatterbox": {
+        "coverage": {
+          "rate": 0.98,
+          "lo": 0.9428533167296139,
+          "hi": 0.9931752486770326,
+          "k": 147,
+          "n": 150,
+          "method": "Wilson score, 95%"
+        },
+        "committed_error": {
+          "rate": 0.11564625850340136,
+          "lo": 0.07346952865890682,
+          "hi": 0.17739955678050429,
+          "k": 17,
+          "n": 147,
+          "method": "Wilson score, 95%"
+        },
+        "false_positive_rate": {
+          "rate": 0.0,
+          "lo": 0.0,
+          "hi": 0.029359645293763368,
+          "k": 0,
+          "n": 127,
+          "method": "Wilson score, 95%"
+        }
+      }
+    }
+  },
+  "replay_mic": {
+    "channels": [
+      "replay_mic",
+      "replay_mic_v0.4"
+    ],
+    "prefix_s": 4.0,
+    "band_used": {
+      "channel": "g723_1_6k3",
+      "tau_clone": 0.5714285714285714,
+      "tau_human": 0.013888888888888888
+    },
+    "band_note": "replay is not in the codec grid, so it has no band of its own. The live path falls back to the most degrading condition measured, g723_1_6k3, never to clean (src/pramaan/stream.py). That is the band applied here.",
+    "rows": {
+      "replay_mic": {
+        "n_clips": 99,
+        "n_bona": 50,
+        "n_spoof": 49,
+        "by_generator": {
+          "encodec": 9,
+          "kokoro": 9,
+          "none": 50,
+          "mms_vits": 8,
+          "xtts_v2": 8,
+          "freevc24": 8,
+          "mac_say": 7
+        },
+        "shipped": {
+          "eer": 0.020204081632653074,
+          "auroc": 0.9995918367346939,
+          "ece": 0.011598543575287699,
+          "protocol_note": "IN-SAMPLE: ship() trains on replay rows at weight 30. This is what the demo runs, not a generalisation claim.",
+          "genuine_called_synthetic": 0.0,
+          "genuine_called_human": 0.96,
+          "spoof_called_synthetic": 0.9795918367346939,
+          "spoof_called_human": 0.0,
+          "spoof_deferred": 0.020408163265306145,
+          "ci": {
+            "eer": 0.020204081632653074,
+            "lo": 0.0,
+            "hi": 0.04127659574468083,
+            "n_boot": 2000,
+            "n_units": 93,
+            "n_clips": 99,
+            "n_bona": 50,
+            "n_spoof": 49,
+            "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+          }
+        },
+        "channel_heldout": {
+          "eer": 0.18183673469387754,
+          "auroc": 0.8951020408163265,
+          "ece": 0.11805446373784127,
+          "protocol_note": "channel held out of training. The recordings are not: their clean and codec versions remain in training, so this is a channel-shift number, not a held-out-clip number.",
+          "genuine_called_synthetic": 0.14,
+          "genuine_called_human": 0.54,
+          "spoof_called_synthetic": 0.7551020408163265,
+          "spoof_called_human": 0.08163265306122448,
+          "spoof_deferred": 0.16326530612244905,
+          "ci": {
+            "eer": 0.18183673469387754,
+            "lo": 0.0999813286163522,
+            "hi": 0.25227272727272726,
+            "n_boot": 2000,
+            "n_units": 93,
+            "n_clips": 99,
+            "n_bona": 50,
+            "n_spoof": 49,
+            "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+          }
+        }
+      },
+      "replay_mic_v0.4": {
+        "n_clips": 100,
+        "n_bona": 50,
+        "n_spoof": 50,
+        "by_generator": {
+          "kokoro": 8,
+          "none": 50,
+          "mms_vits": 8,
+          "xtts_v2": 9,
+          "mac_say": 8,
+          "encodec": 9,
+          "freevc24": 8
+        },
+        "shipped": {
+          "eer": 0.02000000000000001,
+          "auroc": 0.9992,
+          "ece": 0.020634920634920586,
+          "protocol_note": "IN-SAMPLE: ship() trains on replay rows at weight 30. This is what the demo runs, not a generalisation claim.",
+          "genuine_called_synthetic": 0.04,
+          "genuine_called_human": 0.94,
+          "spoof_called_synthetic": 1.0,
+          "spoof_called_human": 0.0,
+          "spoof_deferred": 0.0,
+          "ci": {
+            "eer": 0.02000000000000001,
+            "lo": 0.0,
+            "hi": 0.0510880895420369,
+            "n_boot": 2000,
+            "n_units": 93,
+            "n_clips": 100,
+            "n_bona": 50,
+            "n_spoof": 50,
+            "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+          }
+        },
+        "channel_heldout": {
+          "eer": 0.12,
+          "auroc": 0.9616,
+          "ece": 0.04529907946088621,
+          "protocol_note": "channel held out of training. The recordings are not: their clean and codec versions remain in training, so this is a channel-shift number, not a held-out-clip number.",
+          "genuine_called_synthetic": 0.04,
+          "genuine_called_human": 0.64,
+          "spoof_called_synthetic": 0.84,
+          "spoof_called_human": 0.02,
+          "spoof_deferred": 0.14000000000000004,
+          "ci": {
+            "eer": 0.12,
+            "lo": 0.04923226001718346,
+            "hi": 0.18008411698012533,
+            "n_boot": 2000,
+            "n_units": 93,
+            "n_clips": 100,
+            "n_bona": 50,
+            "n_spoof": 50,
+            "method": "cluster bootstrap over parent recordings, 2.5th and 97.5th percentile"
+          }
+        }
+      }
+    },
+    "worst_channel": "replay_mic",
+    "worst_channel_eer_heldout": 0.18183673469387754,
+    "headline": "Playing audio through a loudspeaker into a microphone costs the detector real accuracy. With the channel held out of training, EER on replay_mic is 18.2% (95% CI 10.0% to 25.2%), and at the g723_1_6k3 fallback band 75.5% of clones played through a speaker are called synthetic while 14.0% of genuine speech through the same speaker is called synthetic too, which is the larger of the two problems and is far above the 0.9% this system reports on the telephony grid. The shipped head scores better on these clips because it trains on them, so its number is in sample and is labelled as such rather than quoted as generalisation. This is published rather than hidden, it is why docs/RUNSHEET.md records that the Chatterbox clone through the microphone reads as human, and it is the beat where the device push does the blocking instead of the detector."
+  },
+  "adversarial_malafide": {
+    "attack": "Malafide-style convolutive noise, arXiv 2306.07655",
+    "variant": "BLACK BOX. Random short FIR filters, worst case over the bank. The published attack optimises the filter against the countermeasure with gradients; this does not. Every number here is therefore a LOWER BOUND on the damage the published attack would do.",
+    "applied_to": "held-out spoof clips only. Genuine speech is never filtered, because an attacker controls their own synthetic audio and not the victim's microphone.",
+    "detector": "the shipped bundle, not retrained, not refit, not recalibrated",
+    "n_spoof": 505,
+    "n_bona": 127,
+    "n_filters": 9,
+    "taps": [
+      129,
+      257,
+      513
+    ],
+    "off_centre_energy": [
+      0.05,
+      0.15,
+      0.35
+    ],
+    "seed": 0,
+    "before": {
+      "eer": 0.0,
+      "catch_rate": 1.0
+    },
+    "per_filter": [
+      {
+        "filter": "fir129_s0.05",
+        "taps": 129,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": -0.018340110778808594,
+        "distortion_db_median": 26.20812225341797,
+        "distortion_db_min": 24.37944793701172,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir129_s0.15",
+        "taps": 129,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": -0.13356399536132812,
+        "distortion_db_median": 19.17536163330078,
+        "distortion_db_min": 16.294239044189453,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir129_s0.35",
+        "taps": 129,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 0.1622772216796875,
+        "distortion_db_median": 15.539875030517578,
+        "distortion_db_min": 11.393259048461914,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir257_s0.05",
+        "taps": 257,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 0.04033851623535156,
+        "distortion_db_median": 28.603246688842773,
+        "distortion_db_min": 26.20728302001953,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir257_s0.15",
+        "taps": 257,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 0.11454010009765625,
+        "distortion_db_median": 14.39327621459961,
+        "distortion_db_min": 12.195438385009766,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir257_s0.35",
+        "taps": 257,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 0.5077381134033203,
+        "distortion_db_median": 9.337467193603516,
+        "distortion_db_min": 7.344074726104736,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir513_s0.05",
+        "taps": 513,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": -0.010633468627929688,
+        "distortion_db_median": 29.667871475219727,
+        "distortion_db_min": 26.166048049926758,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir513_s0.15",
+        "taps": 513,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 0.16728591918945312,
+        "distortion_db_median": 17.972909927368164,
+        "distortion_db_min": 14.542972564697266,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      {
+        "filter": "fir513_s0.35",
+        "taps": 513,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": 1.257253646850586,
+        "distortion_db_median": 10.768573760986328,
+        "distortion_db_min": 7.48577356338501,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      }
+    ],
+    "worst_case": {
+      "by_eer": {
+        "filter": "fir129_s0.05",
+        "taps": 129,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": -0.018340110778808594,
+        "distortion_db_median": 26.20812225341797,
+        "distortion_db_min": 24.37944793701172,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      },
+      "by_catch_rate": {
+        "filter": "fir129_s0.05",
+        "taps": 129,
+        "eer": 0.0,
+        "auroc": 1.0,
+        "catch_rate": 1.0,
+        "median_score_shift": -0.018340110778808594,
+        "distortion_db_median": 26.20812225341797,
+        "distortion_db_min": 24.37944793701172,
+        "catch_rate_by_generator": {
+          "encodec": 1.0,
+          "freevc24": 1.0,
+          "kokoro": 1.0,
+          "mac_say": 1.0,
+          "mms_vits": 1.0,
+          "xtts_v2": 1.0
+        }
+      }
+    },
+    "broke_detection": false,
+    "unmeasured": [
+      "white-box gradient attack against this system",
+      "adversarial training as a defence, which needs gradients through a 300M-parameter frozen frontend and is a GPU workload",
+      "the attack against the Gate's sequential decision rather than against a single 4 s score"
+    ],
+    "headline": "The attack does not land. Across all 9 filters, 129 to 513 taps at 0.05 to 0.35 off-centre energy, held-out EER on 505 seen-family spoof clips stays at 0.00% against 0.00% before the attack, and the share of clones called synthetic at the shipped band stays at 100.0% against 100.0% before, on every filter including the most aggressive one at a median signal-to-distortion of 9.3 dB, where the colouration is audible. Under that filter the median spoof score moves +0.508 in log-odds, towards synthetic rather than away from it, so the filter is adding evidence for the detector instead of removing it. This is the weak version of the attack. The published Malafide optimises the filter against the detector with gradients and would do more. A white-box gradient attack against the frozen XLS-R frontend remains unmeasured, and adversarial training is out of scope on this hardware, because it needs gradients through a 300M-parameter frontend and there is no GPU for it."
+  },
+  "streaming_leave_one_out": {
+    "summary": {
+      "n_directions": 9,
+      "channels": [
+        "clean",
+        "g722_64k",
+        "g726_32k",
+        "opus_24k",
+        "speex_wb_q4",
+        "opus_8k",
+        "g723_1_6k3"
+      ],
+      "worst_direction_clean": "encodec",
+      "worst_direction_clean_committed_error": 0.4512195121951219,
+      "worst_false_alarm_direction_clean": "mms_vits",
+      "worst_false_alarm_clean": 0.03937007874015748,
+      "n_cells_gate_cannot_commit": 42,
+      "n_cells_total": 63,
+      "cells_gate_cannot_commit": [
+        "encodec/g722_64k",
+        "encodec/g726_32k",
+        "encodec/opus_24k",
+        "encodec/speex_wb_q4",
+        "encodec/opus_8k",
+        "encodec/g723_1_6k3",
+        "mac_say/g722_64k",
+        "mac_say/g726_32k",
+        "mac_say/opus_24k",
+        "mac_say/speex_wb_q4",
+        "mac_say/opus_8k",
+        "mac_say/g723_1_6k3",
+        "mms_vits/g722_64k",
+        "mms_vits/g726_32k",
+        "mms_vits/opus_24k",
+        "mms_vits/speex_wb_q4",
+        "mms_vits/opus_8k",
+        "mms_vits/g723_1_6k3",
+        "kokoro/g722_64k",
+        "kokoro/g726_32k",
+        "kokoro/opus_24k",
+        "kokoro/speex_wb_q4",
+        "kokoro/opus_8k",
+        "kokoro/g723_1_6k3",
+        "espeak_ng/g722_64k",
+        "espeak_ng/g726_32k",
+        "espeak_ng/opus_24k",
+        "espeak_ng/speex_wb_q4",
+        "espeak_ng/opus_8k",
+        "espeak_ng/g723_1_6k3",
+        "piper/g722_64k",
+        "piper/g726_32k",
+        "piper/opus_24k",
+        "piper/speex_wb_q4",
+        "piper/opus_8k",
+        "piper/g723_1_6k3",
+        "chatterbox/g722_64k",
+        "chatterbox/g726_32k",
+        "chatterbox/opus_24k",
+        "chatterbox/speex_wb_q4",
+        "chatterbox/opus_8k",
+        "chatterbox/g723_1_6k3"
+      ],
+      "note": "Every direction trains its own head on the other trained families and is replayed against held-out genuine speech, so no row here is in sample. The clean channel is the only one where every direction is measurable: on the six codec channels the held-out family is cached at 4.0 s alone for every family except xtts_v2 and freevc24, and the Gate needs three updates at or above 1.5 s before it may commit, so 42 of 63 cells cannot commit on the held-out clones for a cache reason. Their genuine halves are still measured and their false-alarm rates still count."
+    },
+    "by_held_out": {
+      "xtts_v2": {
+        "trained_on": [
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8663101604278075,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.5833333333333334,
+            "n_committed": 162,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 35,
+            "committed_error": 0.06172839506172845,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 25,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8449197860962567,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.5166666666666667,
+            "n_committed": 158,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 31,
+            "committed_error": 0.09493670886075944,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 29,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g726_32k": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8609625668449198,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.5666666666666667,
+            "n_committed": 161,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 34,
+            "committed_error": 0.18012422360248448,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 26,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "opus_24k": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8556149732620321,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.55,
+            "n_committed": 160,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 33,
+            "committed_error": 0.050000000000000044,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 27,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "speex_wb_q4": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8502673796791443,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.5333333333333333,
+            "n_committed": 159,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 32,
+            "committed_error": 0.09433962264150941,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 28,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "opus_8k": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8235294117647058,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.48333333333333334,
+            "n_committed": 154,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 29,
+            "committed_error": 0.06493506493506496,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 33,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g723_1_6k3": {
+            "n_clips": 187,
+            "n_genuine": 127,
+            "n_spoof": 60,
+            "coverage": 0.8770053475935828,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.65,
+            "n_committed": 164,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 39,
+            "committed_error": 0.22560975609756095,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 23,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          }
+        },
+        "clean_coverage": 0.8663101604278075,
+        "clean_committed_error": 0.06172839506172845,
+        "clean_false_positive_rate": 0.0
+      },
+      "freevc24": {
+        "trained_on": [
+          "xtts_v2",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 193,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 66,
+            "committed_error": 0.005181347150259086,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 0.9740932642487047,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.9242424242424242,
+            "n_committed": 188,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 61,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 5,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g726_32k": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 0.9119170984455959,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.7424242424242424,
+            "n_committed": 176,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 49,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 17,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "opus_24k": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 193,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 66,
+            "committed_error": 0.010362694300518172,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.015748031496062992,
+            "n_false_positive": 2,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "speex_wb_q4": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 0.9637305699481865,
+            "coverage_genuine": 0.9763779527559056,
+            "coverage_spoof": 0.9393939393939394,
+            "n_committed": 186,
+            "n_committed_genuine": 124,
+            "n_committed_spoof": 62,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 7,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "opus_8k": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 0.927461139896373,
+            "coverage_genuine": 0.952755905511811,
+            "coverage_spoof": 0.8787878787878788,
+            "n_committed": 179,
+            "n_committed_genuine": 121,
+            "n_committed_spoof": 58,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 14,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g723_1_6k3": {
+            "n_clips": 193,
+            "n_genuine": 127,
+            "n_spoof": 66,
+            "coverage": 0.8497409326424871,
+            "coverage_genuine": 0.968503937007874,
+            "coverage_spoof": 0.6212121212121212,
+            "n_committed": 164,
+            "n_committed_genuine": 123,
+            "n_committed_spoof": 41,
+            "committed_error": 0.018292682926829285,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 29,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              3.0,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          }
+        },
+        "clean_coverage": 1.0,
+        "clean_committed_error": 0.005181347150259086,
+        "clean_false_positive_rate": 0.007874015748031496
+      },
+      "encodec": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.968503937007874,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.937007874015748,
+            "n_committed": 246,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 119,
+            "committed_error": 0.4512195121951219,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 8,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.49606299212598426,
+            "coverage_genuine": 0.9921259842519685,
+            "coverage_spoof": 0.0,
+            "n_committed": 126,
+            "n_committed_genuine": 126,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 128,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.484251968503937,
+            "coverage_genuine": 0.968503937007874,
+            "coverage_spoof": 0.0,
+            "n_committed": 123,
+            "n_committed_genuine": 123,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 131,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.4921259842519685,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 129,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.484251968503937,
+            "coverage_genuine": 0.968503937007874,
+            "coverage_spoof": 0.0,
+            "n_committed": 123,
+            "n_committed_genuine": 123,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 131,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.484251968503937,
+            "coverage_genuine": 0.968503937007874,
+            "coverage_spoof": 0.0,
+            "n_committed": 123,
+            "n_committed_genuine": 123,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 131,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 0.968503937007874,
+        "clean_committed_error": 0.4512195121951219,
+        "clean_false_positive_rate": 0.0
+      },
+      "mac_say": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 209,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 82,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.5980861244019139,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 84,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.569377990430622,
+            "coverage_genuine": 0.937007874015748,
+            "coverage_spoof": 0.0,
+            "n_committed": 119,
+            "n_committed_genuine": 119,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 90,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.5980861244019139,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008000000000000007,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 84,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 1.0,
+        "clean_committed_error": 0.0,
+        "clean_false_positive_rate": 0.0
+      },
+      "mms_vits": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.984251968503937,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.968503937007874,
+            "n_committed": 250,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 123,
+            "committed_error": 0.040000000000000036,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.03937007874015748,
+            "n_false_positive": 5,
+            "deferred": 4,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.047244094488189003,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.047244094488188976,
+            "n_false_positive": 6,
+            "deferred": 127,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.49606299212598426,
+            "coverage_genuine": 0.9921259842519685,
+            "coverage_spoof": 0.0,
+            "n_committed": 126,
+            "n_committed_genuine": 126,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 128,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.47244094488188976,
+            "coverage_genuine": 0.9448818897637795,
+            "coverage_spoof": 0.0,
+            "n_committed": 120,
+            "n_committed_genuine": 120,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 134,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.4921259842519685,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008000000000000007,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 129,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 0.984251968503937,
+        "clean_committed_error": 0.040000000000000036,
+        "clean_false_positive_rate": 0.03937007874015748
+      },
+      "kokoro": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 170,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 43,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7470588235294118,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 43,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7470588235294118,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 43,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7470588235294118,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 43,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7470588235294118,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.007874015748031482,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 43,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7176470588235294,
+            "coverage_genuine": 0.9606299212598425,
+            "coverage_spoof": 0.0,
+            "n_committed": 122,
+            "n_committed_genuine": 122,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 48,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 170,
+            "n_genuine": 127,
+            "n_spoof": 43,
+            "coverage": 0.7294117647058823,
+            "coverage_genuine": 0.9763779527559056,
+            "coverage_spoof": 0.0,
+            "n_committed": 124,
+            "n_committed_genuine": 124,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008064516129032251,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 46,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 1.0,
+        "clean_committed_error": 0.0,
+        "clean_false_positive_rate": 0.0
+      },
+      "espeak_ng": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "piper"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 254,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 127,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.5,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 127,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.4921259842519685,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008000000000000007,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 129,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.468503937007874,
+            "coverage_genuine": 0.937007874015748,
+            "coverage_spoof": 0.0,
+            "n_committed": 119,
+            "n_committed_genuine": 119,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 135,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 254,
+            "n_genuine": 127,
+            "n_spoof": 127,
+            "coverage": 0.4921259842519685,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008000000000000007,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 129,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 1.0,
+        "clean_committed_error": 0.0,
+        "clean_false_positive_rate": 0.0
+      },
+      "piper": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng"
+        ],
+        "n_trained_on": 7,
+        "by_channel": {
+          "clean": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 1.0,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 1.0,
+            "n_committed": 209,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 82,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 0,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6076555023923444,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 82,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.6028708133971292,
+            "coverage_genuine": 0.9921259842519685,
+            "coverage_spoof": 0.0,
+            "n_committed": 126,
+            "n_committed_genuine": 126,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 83,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.569377990430622,
+            "coverage_genuine": 0.937007874015748,
+            "coverage_spoof": 0.0,
+            "n_committed": 119,
+            "n_committed_genuine": 119,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 90,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 209,
+            "n_genuine": 127,
+            "n_spoof": 82,
+            "coverage": 0.5980861244019139,
+            "coverage_genuine": 0.984251968503937,
+            "coverage_spoof": 0.0,
+            "n_committed": 125,
+            "n_committed_genuine": 125,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008000000000000007,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 84,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 1.0,
+        "clean_committed_error": 0.0,
+        "clean_false_positive_rate": 0.0
+      },
+      "chatterbox": {
+        "trained_on": [
+          "xtts_v2",
+          "freevc24",
+          "encodec",
+          "mac_say",
+          "mms_vits",
+          "kokoro",
+          "espeak_ng",
+          "piper"
+        ],
+        "n_trained_on": 8,
+        "by_channel": {
+          "clean": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.98,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.8695652173913043,
+            "n_committed": 147,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 20,
+            "committed_error": 0.11564625850340138,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 3,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              1.5,
+              2.0,
+              2.5,
+              3.0,
+              3.5,
+              4.0
+            ],
+            "gate_can_commit_on_held_out": true
+          },
+          "g722_64k": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.8466666666666667,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 23,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g726_32k": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.8466666666666667,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 23,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_24k": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.8466666666666667,
+            "coverage_genuine": 1.0,
+            "coverage_spoof": 0.0,
+            "n_committed": 127,
+            "n_committed_genuine": 127,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 1.5,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 23,
+            "n_prefixes_available": 8,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "speex_wb_q4": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.84,
+            "coverage_genuine": 0.9921259842519685,
+            "coverage_spoof": 0.0,
+            "n_committed": 126,
+            "n_committed_genuine": 126,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 24,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "opus_8k": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.7933333333333333,
+            "coverage_genuine": 0.937007874015748,
+            "coverage_spoof": 0.0,
+            "n_committed": 119,
+            "n_committed_genuine": 119,
+            "n_committed_spoof": 0,
+            "committed_error": 0.0,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.0,
+            "n_false_positive": 0,
+            "deferred": 31,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          },
+          "g723_1_6k3": {
+            "n_clips": 150,
+            "n_genuine": 127,
+            "n_spoof": 23,
+            "coverage": 0.8266666666666667,
+            "coverage_genuine": 0.9763779527559056,
+            "coverage_spoof": 0.0,
+            "n_committed": 124,
+            "n_committed_genuine": 124,
+            "n_committed_spoof": 0,
+            "committed_error": 0.008064516129032251,
+            "median_time_to_decision_s": 3.0,
+            "false_positive_rate": 0.007874015748031496,
+            "n_false_positive": 1,
+            "deferred": 26,
+            "n_prefixes_available": 4,
+            "held_out_prefixes_at_or_above_min_commit": [
+              4.0
+            ],
+            "gate_can_commit_on_held_out": false
+          }
+        },
+        "clean_coverage": 0.98,
+        "clean_committed_error": 0.11564625850340138,
+        "clean_false_positive_rate": 0.0
+      }
+    }
+  }
+}

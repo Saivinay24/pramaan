@@ -1,0 +1,50 @@
+[
+  {
+    "name": "start",
+    "t": 0
+  },
+  {
+    "name": "line human_hindi.wav",
+    "t": 3.01
+  },
+  {
+    "name": "line clone_xtts_v2.wav",
+    "t": 8.615
+  },
+  {
+    "name": "line pair_real_hindi.wav",
+    "t": 14.224
+  },
+  {
+    "name": "line pair_clone_hindi.wav",
+    "t": 19.829
+  },
+  {
+    "name": "line clone_elevenlabs.wav",
+    "t": 25.437
+  },
+  {
+    "name": "line human_tamil.wav",
+    "t": 31.04
+  },
+  {
+    "name": "line clone_kokoro.wav",
+    "t": 36.65
+  },
+  {
+    "name": "line human_telugu.wav",
+    "t": 42.261
+  },
+  {
+    "name": "line clone_mms_vits.wav",
+    "t": 47.867
+  },
+  {
+    "name": "line clone_mac_say.wav",
+    "t": 53.472
+  },
+  {
+    "name": "end",
+    "t": 62.081
+  }
+]

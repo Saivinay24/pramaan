@@ -1,0 +1,16 @@
+{
+ "title": "Clone · XTTS-v2 (IndicSynth, Hindi)",
+ "origin": "IndicSynth XTTS-v2 synthetic speech, CC-BY-NC",
+ "language": "hindi",
+ "label": "synthetic",
+ "caller": {
+  "name": "Rajesh Menon",
+  "claims": "claims to be Group CFO, calling from a new number"
+ },
+ "action": {
+  "what": "Approve outward transfer to a new beneficiary",
+  "amount": "₹ 42,00,000",
+  "to": "to a beneficiary added 11 minutes ago"
+ },
+ "seed": 5
+}

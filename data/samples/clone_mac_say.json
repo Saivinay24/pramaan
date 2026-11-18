@@ -1,0 +1,16 @@
+{
+ "title": "Clone · Apple on-device TTS (Telugu)",
+ "origin": "Apple macOS TTS synthetic speech",
+ "language": "telugu",
+ "label": "synthetic",
+ "caller": {
+  "name": "Suresh Babu",
+  "claims": "claims to be the branch's regional director"
+ },
+ "action": {
+  "what": "Approve outward transfer to a new beneficiary",
+  "amount": "₹ 42,00,000",
+  "to": "to a beneficiary added 11 minutes ago"
+ },
+ "seed": 5
+}

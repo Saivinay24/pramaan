@@ -1,0 +1,30 @@
+# Rubric map: where each of the ten marks is earned
+
+Ten criteria, ten marks each. For every criterion: the evidence we hold, the slide or demo beat that delivers it, and the trap that loses it. No criterion is answered with an adjective.
+
+| # | Criterion | Evidence we hold | Delivered by | Trap |
+|---|---|---|---|---|
+| 1 | Problem understanding | The attack chain with a victim, a mechanism and a workflow (voice as an approval factor). The four commitments read out of the PS text: during the call, actionable score, prevention, on-device and Indian languages. | S1, slide 1 and 2 top line | Opening with news statistics. Every team will. |
+| 2 | Innovation and originality | Generator diversity as the design lever, measured: worst case 39.6% with few families, 13.2% with all 8, previous build 35.9%, on an unseen 2025 cloner. Same-speaker same-sentence protocol. Detection as a router with a mandatory device factor. Prior art named on slide 6 before a judge can. | S2, slide 2 right column; S6 | Claiming the pieces as ours. Say "we did not invent the pieces" out loud. |
+| 3 | Relevance to PS | Traceability: acoustic and prosodic artefacts (Listener), continuous risk score every 0.5 s (Gate), configurable thresholds (band), alerting and interaction layer (console), on-device inference (Wi-Fi off), APIs (FastAPI and WebSocket), Indian languages (Hindi, Tamil, Telugu in every test), prevention (ladder). | S2, slide 3 | Demoing detection only. Prevention is half the title. |
+| 4 | Technical approach | Architecture diagram with data shapes; frozen SSL frontend plus 2,049 trained parameters with the published reason; isotonic calibration per prefix; sequential gate; codec grid; hash chain. | S2, slide 3 | A block diagram with no numbers on the arrows. |
+| 5 | Feasibility | Built and measured on one laptop in days. Known risks with measured mitigations: unseen cloner (13.2%, 95% CI 4.7% to 21.9%) and the repair cost (12 clips to 0.0%); calibration drift (ECE 0.05 to 0.08); narrowband codecs (worst cell on the slide); licences named. | S4, slide 4 | A deck with no failures. It reads as untested. |
+| 6 | Prototype | Live console: real Hindi speech, a seen-family clone blocked at 1.5 s, the 2025 clone handled by challenge and device approval, ledger tamper caught. Wi-Fi off, sample origins displayed. | S3 | A terminal log. It is graded by people in a room. |
+| 7 | Scalability | 185 ms per update on CPU; 5.4 calls per core at a 1 s update; 37 cores for 200 seats; no GPU; on-premise so scaling and privacy are one fact. Unmeasured: per-stream memory, thermal throttling. | S5, slide 5 | Quoting 1/RTF. It ignores window overlap. |
+| 8 | Impact and usefulness | Decision before the damage; a real customer is deferred and asked, not accused (1.1% false alarms pooled across all 7 channels, 1.6% on the worst, G.726 32 kbps); the published grid lets a bank check a vendor's claim before buying. | S5, slide 5 | A fabricated market size in crores. |
+| 9 | Business and sustainability | Per-seat on-premise SDK plus a re-evaluation subscription, because the model decays when new cloners ship and we measured what a cycle costs. Near-zero marginal cost per call, no third-party API. Adoption: banks, then enterprise finance, then telecom. Licence path stated. | S5, slide 5 | A fire-and-forget product claim. |
+| 10 | Presentation | Six speakers, timed, one voice per slot, Q&A ownership assigned, every number from one file, deck generated from that file, no em dashes. | Everyone | Running long. Rehearse against a timer twice. |
+
+---
+
+## What the PS names that we deliberately did not build
+
+A stated exclusion reads as scope control. An unstated one reads as an oversight a judge found before we did, so these are said out loud rather than left for the Q&A.
+
+**Cross-session consistency against historical genuine samples.** PS SIH26104 names it as a Key Component: "cross-session consistency checks comparing ongoing call features against historical genuine samples (where available) to detect anomalies in speaker identity." **Pramaan does not implement it, and the reason is the dataset, not the model.** That check needs enrolled speakers, meaning a bank's own stored recordings of a customer from previous calls, and we have none: FLEURS gives one recording per speaker, not a history per speaker. Enrolment is a deployment-side dataset that arrives with the customer, and standing it up from two clips of the same FLEURS speaker would be a demonstration rather than a measurement.
+
+**The academic frame it would use, named so nobody has to ask.** **SASV**, spoofing-aware speaker verification, which fuses a speaker-verification score with an anti-spoofing score rather than running the two as independent checks. Two things worth saying with it. The PS's own wording, "where available", already treats the history as optional. And the check answers a different question from ours: cross-session consistency asks "is this the same person as last time", Pramaan asks "is this a person at all". The second is the one that can be answered on a first call from a number with no history, which is the case the fraud actually arrives in. Building it would also mean a new speaker-embedding dependency inside a pinned py3.14 stack that this project's own log warns against disturbing, which is a cost with a measured precedent behind it.
+
+**One more, already carried in the deck.** AMR-WB and EVS are absent from the seven-codec grid because the toolchain on this machine cannot encode them. They are listed as absent and never faked; `src/pramaan/channels.py` `UNAVAILABLE` carries the reason per codec.
+
+**How to say either of these on stage:** name the exclusion, give the reason, name the frame it would use, and stop. Do not apologise and do not say "we ran out of time".

@@ -1,0 +1,214 @@
+[
+  {
+    "name": "START",
+    "t": 0
+  },
+  {
+    "name": "L1 genuine hindi opus24 :: armed",
+    "t": 4.613
+  },
+  {
+    "name": "L1 genuine hindi opus24 :: start",
+    "t": 4.696
+  },
+  {
+    "name": "L1 genuine hindi opus24 :: end",
+    "t": 44.727
+  },
+  {
+    "name": "L2 clone xtts seen :: armed",
+    "t": 49.835
+  },
+  {
+    "name": "L2 clone xtts seen :: start",
+    "t": 49.856
+  },
+  {
+    "name": "L2 clone xtts seen :: a-block",
+    "t": 77.883
+  },
+  {
+    "name": "L2 clone xtts seen :: end",
+    "t": 81.401
+  },
+  {
+    "name": "L3 pairA real :: armed",
+    "t": 86.517
+  },
+  {
+    "name": "L3 pairA real :: start",
+    "t": 86.549
+  },
+  {
+    "name": "L3 pairA real :: end",
+    "t": 116.615
+  },
+  {
+    "name": "L4 pairB clone 2025 :: armed",
+    "t": 121.727
+  },
+  {
+    "name": "L4 pairB clone 2025 :: start",
+    "t": 121.759
+  },
+  {
+    "name": "L4 pairB clone 2025 :: a-chal",
+    "t": 151.78
+  },
+  {
+    "name": "L4 pairB clone 2025 :: a-oob",
+    "t": 155.299
+  },
+  {
+    "name": "L4 pairB clone 2025 :: a-block",
+    "t": 158.818
+  },
+  {
+    "name": "L4 pairB clone 2025 :: end",
+    "t": 162.357
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: armed",
+    "t": 167.468
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: start",
+    "t": 167.51
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: a-chal",
+    "t": 193.535
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: a-oob",
+    "t": 197.043
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: a-block",
+    "t": 200.557
+  },
+  {
+    "name": "L5 clone elevenlabs 2026 unseen :: end",
+    "t": 204.085
+  },
+  {
+    "name": "L6 genuine tamil worst carrier :: armed",
+    "t": 209.203
+  },
+  {
+    "name": "L6 genuine tamil worst carrier :: start",
+    "t": 209.279
+  },
+  {
+    "name": "L6 genuine tamil worst carrier :: end",
+    "t": 235.317
+  },
+  {
+    "name": "L7 genuine telugu opus8k :: armed",
+    "t": 240.433
+  },
+  {
+    "name": "L7 genuine telugu opus8k :: start",
+    "t": 240.489
+  },
+  {
+    "name": "L7 genuine telugu opus8k :: end",
+    "t": 262.523
+  },
+  {
+    "name": "C0 carrier sweep begin",
+    "t": 265.525
+  },
+  {
+    "name": "C1 carrier clean",
+    "t": 266.232
+  },
+  {
+    "name": "C1 carrier opus_24k",
+    "t": 271.542
+  },
+  {
+    "name": "C1 carrier g722_64k",
+    "t": 276.85
+  },
+  {
+    "name": "C1 carrier g726_32k",
+    "t": 282.155
+  },
+  {
+    "name": "C1 carrier speex_wb_q4",
+    "t": 287.462
+  },
+  {
+    "name": "C1 carrier opus_8k",
+    "t": 292.769
+  },
+  {
+    "name": "C1 carrier g723_1_6k3",
+    "t": 298.075
+  },
+  {
+    "name": "A1 audit tab",
+    "t": 303.126
+  },
+  {
+    "name": "A2 verify ok",
+    "t": 312.145
+  },
+  {
+    "name": "A3 alter block",
+    "t": 320.168
+  },
+  {
+    "name": "A4 verify broken",
+    "t": 327.189
+  },
+  {
+    "name": "A5 restore",
+    "t": 339.22
+  },
+  {
+    "name": "A6 verify ok again",
+    "t": 345.237
+  },
+  {
+    "name": "E1 evidence tab",
+    "t": 352.258
+  },
+  {
+    "name": "E2 evidence scroll 0",
+    "t": 372.278
+  },
+  {
+    "name": "E2 evidence scroll 219",
+    "t": 392.285
+  },
+  {
+    "name": "E2 evidence scroll 437",
+    "t": 412.299
+  },
+  {
+    "name": "E2 evidence scroll 219",
+    "t": 432.319
+  },
+  {
+    "name": "E2 evidence scroll 0",
+    "t": 452.325
+  },
+  {
+    "name": "B1 about open",
+    "t": 472.353
+  },
+  {
+    "name": "B2 about close",
+    "t": 486.402
+  },
+  {
+    "name": "Z1 live resting",
+    "t": 488.915
+  },
+  {
+    "name": "END",
+    "t": 494.919
+  }
+]

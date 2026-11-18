@@ -1,0 +1,16 @@
+{
+ "title": "Pair A · the real person (FLEURS Hindi recording)",
+ "origin": "real human speech, FLEURS Hindi",
+ "language": "hindi",
+ "label": "human",
+ "caller": {
+  "name": "Rajesh Menon",
+  "claims": "claims to be Group CFO, calling from a new number"
+ },
+ "action": {
+  "what": "Approve outward transfer to a new beneficiary",
+  "amount": "₹ 42,00,000",
+  "to": "to a beneficiary added 11 minutes ago"
+ },
+ "seed": 11
+}

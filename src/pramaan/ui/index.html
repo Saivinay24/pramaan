@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pramaan operator console</title>
+<style>
+/* ============================================================ tokens
+   Colour is defined once, here, and redefined for dark. Nothing below this
+   block hardcodes a colour. The four status hues and the six-step sequential
+   ramp were validated for colour-vision deficiency separation and for contrast
+   against their own surface in each mode before they were written down. */
+:root{
+  color-scheme:light;
+  --page:#eef0f3; --surface:#ffffff; --surface-2:#f6f8fa; --surface-3:#eceff3;
+  --line:#dde2e8; --line-strong:#c3cad3;
+  --ink:#10151b; --ink-2:#465060; --ink-muted:#6b7686; --ink-inverse:#ffffff;
+
+  --accent:#3558d4; --accent-bg:#eaeffc; --accent-line:#b9c8f2;
+  --good:#00806a;   --good-bg:#e3f3ef;   --good-line:#a8d8cc;
+  --warn:#b05e00;   --warn-bg:#fbf0e0;   --warn-line:#e6c68e;
+  --crit:#c4342a;   --crit-bg:#fce9e7;   --crit-line:#f0b5ae;
+
+  --seq-1:#e39286; --seq-2:#d47365; --seq-3:#c2564a;
+  --seq-4:#a63d32; --seq-5:#85291f; --seq-6:#611913;
+  --seq-ink-light:#10151b; --seq-ink-dark:#ffffff;
+
+  --shadow:0 1px 2px rgba(16,21,27,.06), 0 8px 24px rgba(16,21,27,.05);
+  --focus:#3558d4;
+
+  --font:ui-sans-serif,-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:10px; --r-s:7px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --page:#0d1116; --surface:#141a20; --surface-2:#1b222a; --surface-3:#222b35;
+    --line:#29323c; --line-strong:#3b4654;
+    --ink:#e8edf3; --ink-2:#a8b3c1; --ink-muted:#7a8698; --ink-inverse:#0d1116;
+    --accent:#6285e8; --accent-bg:#18223c; --accent-line:#2f4270;
+    --good:#0fa485;   --good-bg:#0d2b26;   --good-line:#1d5348;
+    --warn:#b87c28;   --warn-bg:#2b2211;   --warn-line:#5a441c;
+    --crit:#e45b50;   --crit-bg:#331c1a;   --crit-line:#63302b;
+    --seq-1:#6b4438; --seq-2:#8a5645; --seq-3:#a96a54;
+    --seq-4:#c88066; --seq-5:#e69a7e; --seq-6:#f4b79e;
+    --seq-ink-light:#ffffff; --seq-ink-dark:#10151b;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    --focus:#8aa6ff;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#0d1116; --surface:#141a20; --surface-2:#1b222a; --surface-3:#222b35;
+  --line:#29323c; --line-strong:#3b4654;
+  --ink:#e8edf3; --ink-2:#a8b3c1; --ink-muted:#7a8698; --ink-inverse:#0d1116;
+  --accent:#6285e8; --accent-bg:#18223c; --accent-line:#2f4270;
+  --good:#0fa485;   --good-bg:#0d2b26;   --good-line:#1d5348;
+  --warn:#b87c28;   --warn-bg:#2b2211;   --warn-line:#5a441c;
+  --crit:#e45b50;   --crit-bg:#331c1a;   --crit-line:#63302b;
+  --seq-1:#6b4438; --seq-2:#8a5645; --seq-3:#a96a54;
+  --seq-4:#c88066; --seq-5:#e69a7e; --seq-6:#f4b79e;
+  --seq-ink-light:#ffffff; --seq-ink-dark:#10151b;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  --focus:#8aa6ff;
+}
+
+/* ============================================================ base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--page);color:var(--ink);
+  font:14px/1.45 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,select,input{font:inherit;color:inherit}
+h1,h2,h3{margin:0;font-weight:590;letter-spacing:-.006em}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.n{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.muted{color:var(--ink-muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============================================================ chrome */
+.topbar{display:flex;align-items:center;gap:20px;height:52px;padding:0 20px;
+  background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.wordmark{font-size:19px;font-weight:640;letter-spacing:-.025em}
+.wordmark span{color:var(--accent)}
+.deskname{font-size:12.5px;color:var(--ink-muted);padding-left:12px;border-left:1px solid var(--line)}
+[role="tablist"]{display:flex;gap:2px;margin-left:8px}
+[role="tab"]{background:none;border:0;padding:7px 13px;border-radius:var(--r-s);
+  color:var(--ink-2);cursor:pointer;font-size:13.5px;font-weight:500}
+[role="tab"]:hover{background:var(--surface-2);color:var(--ink)}
+[role="tab"][aria-selected="true"]{background:var(--surface-3);color:var(--ink);font-weight:590}
+.topright{margin-left:auto;display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;padding:5px 10px;
+  border:1px solid var(--line);border-radius:999px;color:var(--ink-2);background:var(--surface-2)}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--good)}
+.iconbtn{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-s);
+  padding:5px 11px;font-size:12.5px;color:var(--ink-2);cursor:pointer}
+.iconbtn:hover{border-color:var(--line-strong);color:var(--ink)}
+
+main{padding:14px 20px 28px}
+.view[hidden]{display:none}
+
+/* ============================================================ line bar */
+.linebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:9px 12px;margin-bottom:12px}
+.linebar .lbl{font-size:12px;color:var(--ink-muted)}
+select{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-s);
+  padding:7px 30px 7px 10px;-webkit-appearance:none;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7686' fill='none' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 11px center;max-width:380px}
+select:hover{border-color:var(--line-strong)}
+.btn{background:var(--surface-2);border:1px solid var(--line-strong);border-radius:var(--r-s);
+  padding:7px 13px;cursor:pointer;font-weight:500;transition:background .12s,border-color .12s}
+.btn:hover:not(:disabled){background:var(--surface-3)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover:not(:disabled){filter:brightness(1.08)}
+.btn.crit{background:var(--crit);border-color:var(--crit);color:#fff}
+.btn.good{background:var(--good);border-color:var(--good);color:#fff}
+.btn.sm{padding:5px 10px;font-size:12.5px}
+.provenance{margin-left:auto;font-size:12.5px;color:var(--ink-muted);text-align:right;max-width:520px}
+.provenance b{color:var(--ink-2);font-weight:590}
+
+/* ============================================================ decision bar */
+.decision{display:grid;grid-template-columns:minmax(260px,1.1fr) minmax(260px,1.2fr) minmax(300px,1fr) minmax(320px,1.15fr);
+  gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;margin-bottom:12px}
+.dcell{padding:16px 20px;border-left:1px solid var(--line);min-width:0}
+.dcell:first-child{border-left:0}
+.dcell .cap{font-size:11.5px;color:var(--ink-muted);margin-bottom:7px}
+.who{font-size:21px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.who-sub{font-size:13px;color:var(--ink-2);margin-top:4px}
+.who-meta{font-size:12px;color:var(--ink-muted);margin-top:8px;display:flex;gap:14px;flex-wrap:wrap}
+.ask{font-size:14.5px;line-height:1.35}
+.amount{font-size:27px;font-weight:620;letter-spacing:-.025em;margin:6px 0 3px;font-variant-numeric:tabular-nums}
+.ask-to{font-size:12.5px;color:var(--ink-muted)}
+.hold{margin-top:10px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:560;
+  padding:5px 10px;border-radius:999px;border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn)}
+.hold.BLOCKED{border-color:var(--crit-line);background:var(--crit-bg);color:var(--crit)}
+.hold.CLEARED{border-color:var(--good-line);background:var(--good-bg);color:var(--good)}
+
+.verdict{display:flex;align-items:baseline;gap:12px}
+.vmark{width:13px;height:13px;flex:0 0 auto;border-radius:3px;background:var(--ink-muted);transform:translateY(-1px)}
+.v-IDLE .vmark{background:var(--ink-muted);border-radius:3px}
+.v-DEFER .vmark{background:var(--warn);border-radius:50%;animation:breathe 1.4s infinite}
+.v-HUMAN .vmark{background:var(--good);border-radius:50%}
+.v-SYNTHETIC .vmark{background:var(--crit);border-radius:2px;transform:translateY(-1px) rotate(45deg)}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.3}}
+.vtext{font-size:20px;font-weight:620;letter-spacing:-.02em}
+.v-DEFER .vtext{color:var(--warn)} .v-HUMAN .vtext{color:var(--good)} .v-SYNTHETIC .vtext{color:var(--crit)}
+.vwhy{font-size:12.5px;color:var(--ink-2);margin-top:8px;min-height:32px}
+.vstats{display:flex;gap:18px;margin-top:10px;font-size:12px;color:var(--ink-muted)}
+.vstats b{display:block;font-family:var(--mono);font-size:14px;color:var(--ink);font-weight:500;margin-top:1px}
+
+.next{background:var(--surface-2)}
+.next .nexttitle{font-size:14.5px;font-weight:560;line-height:1.35;margin-bottom:12px;min-height:38px}
+.actions{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ============================================================ work area */
+/* Every panel is a column: head, body that takes the slack, footnote pinned to
+   the bottom. That is what lets panels sharing a grid row share a baseline
+   top and bottom with no ragged edge and no dead gap. */
+.work{display:grid;grid-template-columns:minmax(420px,1.28fr) minmax(360px,1fr);
+  gap:12px;align-items:stretch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0}
+.phead{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  border-bottom:1px solid var(--line);flex:0 0 auto}
+.phead h2{font-size:13.5px}
+.phead .right{margin-left:auto;font-size:12px;color:var(--ink-muted)}
+.pbody{padding:14px 16px;flex:1 1 auto;display:flex;flex-direction:column;min-width:0;min-height:0}
+
+/* ladder */
+.ladder{list-style:none;margin:0;padding:0;flex:1 1 auto;display:flex;flex-direction:column}
+.ladder li{flex:1 1 auto;align-content:center}
+.ladder li{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;
+  padding:13px 0;border-top:1px solid var(--line)}
+.ladder li:first-child{border-top:0;padding-top:2px}
+.step{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line-strong);
+  display:grid;place-items:center;font-size:11px;color:var(--ink-muted);font-family:var(--mono);margin-top:1px}
+.ladder li.done .step{background:var(--good);border-color:var(--good);color:#fff}
+.ladder li.active .step{background:var(--accent);border-color:var(--accent);color:#fff}
+.ladder li.fail .step{background:var(--crit);border-color:var(--crit);color:#fff}
+.stitle{font-size:14px;font-weight:560}
+.ssub{font-size:12.5px;color:var(--ink-muted);margin-top:2px}
+.sstate{font-size:12px;font-weight:560;white-space:nowrap;margin-top:2px;color:var(--ink-muted)}
+.ladder li.done .sstate{color:var(--good)}
+.ladder li.fail .sstate{color:var(--crit)}
+.ladder li.active .sstate{color:var(--accent)}
+
+.readout{margin-top:9px;padding:12px 14px;border-radius:var(--r-s);
+  background:var(--accent-bg);border:1px solid var(--accent-line)}
+.readout .rlbl{font-size:11.5px;color:var(--ink-2);margin-bottom:6px}
+.phrase{font-size:19px;line-height:1.5}
+.phrase .digits{font-family:var(--mono);font-weight:600;letter-spacing:.08em}
+.rfoot{font-size:11.5px;color:var(--ink-2);margin-top:8px;font-family:var(--mono)}
+.device{margin-top:9px;border:1px solid var(--line-strong);border-radius:12px;
+  padding:12px 14px;background:var(--surface-2)}
+.device .dhead{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-muted);margin-bottom:7px}
+.device .dmsg{font-size:13px;line-height:1.5}
+.device .drow{display:flex;gap:7px;margin-top:10px}
+.code{font-family:var(--mono);font-weight:600;letter-spacing:.1em}
+
+/* risk panel */
+.meterwrap{margin:2px 0 6px}
+.meter{position:relative;height:26px;border-radius:6px;overflow:hidden;
+  border:1px solid var(--line-strong);background:var(--surface-2)}
+.meter:before{content:"no call on this line";position:absolute;inset:0;display:grid;place-items:center;
+  font-size:11.5px;color:var(--ink-muted)}
+.meter.on:before{content:none}
+.meter .zone-h{position:absolute;top:0;bottom:0;left:0;background:var(--good-bg)}
+.meter .zone-s{position:absolute;top:0;bottom:0;right:0;background:var(--crit-bg)}
+.meter .zone-b{position:absolute;top:0;bottom:0;background:var(--warn-bg);
+  border-left:1px solid var(--warn);border-right:1px solid var(--warn)}
+.meter .needle{position:absolute;top:-1px;bottom:-1px;width:2px;background:var(--ink);left:0;
+  transition:left .3s cubic-bezier(.2,.8,.2,1)}
+.meter-ticks{position:relative;height:15px;margin-top:3px}
+.meter-ticks span{position:absolute;transform:translateX(-50%);font-size:10.5px;
+  color:var(--ink-muted);font-family:var(--mono);white-space:nowrap}
+.meter-legend{display:flex;gap:14px;font-size:11.5px;color:var(--ink-muted);margin-top:7px;flex-wrap:wrap}
+.swatch{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+#trace{width:100%;height:190px;display:block;margin-top:8px}
+.tracewrap{position:relative}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line-strong);
+  border-radius:var(--r-s);padding:7px 9px;font-size:12px;box-shadow:var(--shadow);display:none;z-index:5;white-space:nowrap}
+.tip b{font-family:var(--mono);font-weight:560}
+#wave{width:100%;height:44px;display:block;margin-top:8px;border-top:1px solid var(--line);padding-top:6px}
+#wave[hidden]{display:none}
+
+.kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.kv:first-child{border-top:0;padding-top:0}
+.kv span{color:var(--ink-muted)}
+.kv b{font-weight:500;text-align:right}
+
+/* record strip */
+.strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px}
+.blk{flex:0 0 auto;min-width:152px;padding:8px 10px;border:1px solid var(--line);
+  border-radius:var(--r-s);background:var(--surface-2);font-size:12px}
+.blk .be{font-weight:560}
+.blk .bh{font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);margin-top:3px}
+.blk.gate_committed{border-color:var(--line-strong)}
+.blk.transaction_blocked{background:var(--crit-bg);border-color:var(--crit-line)}
+.blk.transaction_cleared{background:var(--good-bg);border-color:var(--good-line)}
+.blk.challenge_issued,.blk.oob_sent,.blk.callback_requested{background:var(--accent-bg);border-color:var(--accent-line)}
+
+/* ============================================================ audit */
+/* The audit view is a two column workbench pinned to the viewport: the call
+   list on the left and the log for the selected call on the right, both ending
+   on the same bottom edge, each scrolling inside itself. */
+.audit{display:grid;grid-template-columns:320px minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr);gap:12px;
+  align-items:stretch;height:calc(100vh - 94px);min-height:560px}
+.audit > .panel{min-height:0}
+.auditmain{display:flex;flex-direction:column;gap:12px;min-height:0;min-width:0}
+.auditmain .banner{margin-bottom:0;flex:0 0 auto}
+.auditmain > .panel{flex:1 1 auto;min-height:0}
+.auditmain .integrity{margin-top:0;flex:0 0 auto}
+.calllist{list-style:none;margin:0;padding:0;flex:1 1 auto;min-height:0;overflow-y:auto}
+.calllist li{border-top:1px solid var(--line)}
+.calllist li:first-child{border-top:0}
+.calllist button{width:100%;text-align:left;background:none;border:0;padding:11px 16px;cursor:pointer}
+.calllist button:hover{background:var(--surface-2)}
+.calllist button[aria-current="true"]{background:var(--accent-bg);box-shadow:inset 3px 0 0 var(--accent)}
+.cl-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cl-name{font-size:13.5px;font-weight:560}
+.cl-time{font-size:11.5px;color:var(--ink-muted);font-family:var(--mono)}
+.cl-sub{font-size:11.5px;color:var(--ink-muted);margin-top:3px}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:4px;
+  border:1px solid var(--line-strong);color:var(--ink-2)}
+.tag.BLOCKED{background:var(--crit-bg);border-color:var(--crit-line);color:var(--crit)}
+.tag.CLEARED{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.tag.HELD{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn)}
+.tag.live{background:var(--accent-bg);border-color:var(--accent-line);color:var(--accent)}
+
+.banner{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--r);
+  border:1px solid var(--line);background:var(--surface-2);margin-bottom:12px;font-size:13.5px}
+.banner.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.banner.bad{background:var(--crit-bg);border-color:var(--crit-line);color:var(--crit)}
+.banner .bicon{font-family:var(--mono);font-weight:700;font-size:15px}
+.banner .bright{margin-left:auto;display:flex;gap:7px}
+.banner b{font-weight:620}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11.5px;color:var(--ink-muted);font-weight:560;
+  padding:9px 12px;border-bottom:1px solid var(--line-strong);position:sticky;top:0;background:var(--surface);z-index:1}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-size:12px;white-space:nowrap}
+tr.altered{background:var(--crit-bg)}
+tr.downstream{background:var(--warn-bg)}
+.chaincell{font-size:11.5px;font-weight:560}
+.chaincell.linked{color:var(--good)} .chaincell.broken{color:var(--crit)} .chaincell.unver{color:var(--warn)}
+.actor{font-size:12px;color:var(--ink-2)}
+.evname{font-weight:560}
+.tablewrap{flex:1 1 auto;min-height:0;overflow:auto}
+.integrity{margin-top:12px;padding:12px 16px;border:1px dashed var(--line-strong);
+  border-radius:var(--r);background:var(--surface-2);font-size:12.5px;color:var(--ink-2);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.integrity .itxt{max-width:640px}
+
+/* ============================================================ evidence */
+/* Evidence reads as three bands, in the order a reader needs them: does it
+   generalise, what does it cost to run, can the number be trusted and kept
+   current. Each band is its own explicit grid; panels in a band share a row,
+   so they share a top and a bottom edge. */
+.ev{display:block}
+.band{margin:0 0 22px}
+.band:last-child{margin-bottom:0}
+.bandhead{display:flex;align-items:baseline;gap:12px;padding:0 2px 10px}
+.bandhead .bt{font-size:15px;font-weight:600;letter-spacing:-.014em;white-space:nowrap}
+.bandhead .bs{font-size:12.5px;color:var(--ink-muted)}
+.bandhead:after{content:"";flex:1 1 auto;height:1px;background:var(--line);
+  align-self:center;margin-left:2px}
+.bandgrid{display:grid;gap:12px;align-items:stretch}
+.band-lead .bandgrid{grid-template-columns:minmax(0,1.85fr) minmax(0,1fr)}
+.band-cost .bandgrid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.band-trust .bandgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.bandgrid > .panel:only-child{grid-column:1/-1}
+.bandgrid .pbody > svg{flex:1 1 auto;min-height:0}
+/* A table in a band absorbs the slack its neighbour's height creates, so a
+   short table breathes instead of leaving a hole above its footnote. */
+.bandgrid table,.bandgrid .heat{flex:1 1 auto}
+.bandgrid td{vertical-align:middle}
+.band-lead .bandhead .bt{font-size:16.5px}
+.ev .wide{grid-column:1/-1}
+.heat{display:grid;gap:2px;font-size:12px}
+.heat .hc{padding:8px 4px;text-align:center;border-radius:3px;font-family:var(--mono);
+  font-variant-numeric:tabular-nums;cursor:default}
+.heat .hr{text-align:left;color:var(--ink-2);padding:8px 8px 8px 0;font-family:var(--font)}
+.heat .hh{color:var(--ink-muted);font-size:11px;text-align:center;padding-bottom:4px}
+.foot{font-size:12px;color:var(--ink-muted);margin-top:auto;padding-top:13px;line-height:1.55;max-width:74ch}
+.ramp{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-muted);margin-top:9px}
+.ramp i{display:block;width:26px;height:9px;border-radius:2px}
+.empty{color:var(--ink-muted);padding:26px;text-align:center;font-size:13.5px}
+.err{color:var(--crit);padding:18px;font-size:13px}
+svg text{font-family:var(--font)}
+
+/* ============================================================ about */
+dialog{border:1px solid var(--line-strong);border-radius:var(--r);padding:0;background:var(--surface);
+  color:var(--ink);max-width:720px;width:calc(100vw - 48px);box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(8,11,15,.5)}
+.dlghead{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.dlgbody{padding:16px 20px 22px;max-height:70vh;overflow:auto}
+.dlgbody h3{font-size:12.5px;color:var(--ink-muted);margin:18px 0 6px;font-weight:560}
+.dlgbody h3:first-child{margin-top:0}
+
+/* ============================================================ status line */
+#status{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
+  background:var(--ink);color:var(--ink-inverse);padding:9px 15px;border-radius:var(--r-s);
+  font-size:13px;box-shadow:var(--shadow);z-index:60;max-width:70ch}
+#status[hidden]{display:none}
+#status.bad{background:var(--crit);color:#fff}
+
+@media (max-width:1400px){
+  .decision{grid-template-columns:1fr 1fr}
+  .dcell:nth-child(3){border-left:0;border-top:1px solid var(--line)}
+  .dcell:nth-child(4){border-top:1px solid var(--line)}
+  .work{grid-template-columns:1fr}
+}
+@media (max-width:1180px){
+  .band-lead .bandgrid,.band-cost .bandgrid,.band-trust .bandgrid{grid-template-columns:minmax(0,1fr)}
+  .audit{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;height:auto}
+  .calllist{max-height:320px}
+  .auditmain{min-height:60vh}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wordmark">Pramaa<span>n</span></div>
+  <div class="deskname">Voice fraud desk</div>
+  <div role="tablist" aria-label="Console sections">
+    <button role="tab" id="tab-live" aria-selected="true" aria-controls="v-live" data-view="live">Live call</button>
+    <button role="tab" id="tab-audit" aria-selected="false" tabindex="-1" aria-controls="v-audit" data-view="audit">Audit</button>
+    <button role="tab" id="tab-evidence" aria-selected="false" tabindex="-1" aria-controls="v-evidence" data-view="evidence">Evidence</button>
+  </div>
+  <div class="topright">
+    <span class="pill"><span class="dot"></span>Audio stays on this machine</span>
+    <button class="iconbtn" id="themebtn" aria-label="Switch to dark theme">Dark</button>
+    <button class="iconbtn" id="aboutbtn">About</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================================================== LIVE -->
+<section class="view" id="v-live" role="tabpanel" aria-labelledby="tab-live">
+
+  <div class="linebar">
+    <span class="lbl">Line</span>
+    <select id="src" aria-label="Call audio source"></select>
+    <span class="lbl">Carrier</span>
+    <select id="cond" aria-label="Telephony channel"></select>
+    <button class="btn primary" id="start">Start monitoring</button>
+    <button class="btn" id="stop" disabled>End call</button>
+    <div class="provenance" id="provenance"></div>
+  </div>
+
+  <div class="decision">
+    <div class="dcell">
+      <div class="cap">Caller</div>
+      <div class="who" id="who">No call on this line</div>
+      <div class="who-sub" id="whosub">Pick a line and start monitoring.</div>
+      <div class="who-meta" id="whometa"></div>
+    </div>
+
+    <div class="dcell">
+      <div class="cap">Requested action</div>
+      <div class="ask" id="ask">Nothing requested yet</div>
+      <div class="amount n" id="amount">&ndash;</div>
+      <div class="ask-to" id="askto"></div>
+      <div class="hold HELD" id="hold">Approval held until verified</div>
+    </div>
+
+    <div class="dcell">
+      <div class="cap">Voice verdict</div>
+      <div class="verdict v-IDLE" id="verdict" aria-live="polite">
+        <span class="vmark" aria-hidden="true"></span>
+        <span class="vtext" id="vtext">Idle</span>
+      </div>
+      <div class="vwhy" id="vwhy">Nothing is being scored.</div>
+      <div class="vstats">
+        <div>Risk<b class="n" id="v-p">&ndash;</b></div>
+        <div>Decided at<b class="n" id="v-dec">&ndash;</b></div>
+        <div>Heard<b class="n" id="v-el">0.0 s</b></div>
+      </div>
+    </div>
+
+    <div class="dcell next">
+      <div class="cap">Do this next</div>
+      <div class="nexttitle" id="nexttitle">Start monitoring the line.</div>
+      <div class="actions">
+        <button class="btn sm" id="a-chal" disabled>Issue challenge</button>
+        <button class="btn sm" id="a-oob" disabled>Send device push</button>
+        <button class="btn sm" id="a-callback" disabled>Log callback</button>
+        <button class="btn sm crit" id="a-block" disabled>Block</button>
+        <button class="btn sm good" id="a-clear" disabled>Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="work">
+    <div class="panel">
+      <div class="phead"><h2>Prevention ladder</h2>
+        <span class="right" id="ladder-note">The voice is never the last factor.</span></div>
+      <div class="pbody">
+        <ul class="ladder">
+          <li id="L1"><span class="step">1</span>
+            <div><div class="stitle">Voice check</div>
+              <div class="ssub" id="L1sub">Scores the live line every half second.</div></div>
+            <span class="sstate" id="L1s">waiting</span></li>
+          <li id="L2"><span class="step">2</span>
+            <div><div class="stitle">Live challenge</div>
+              <div class="ssub">Read the phrase aloud and ask the caller to repeat it.</div>
+              <div id="chalbox"></div></div>
+            <span class="sstate" id="L2s">not started</span></li>
+          <li id="L3"><span class="step">3</span>
+            <div><div class="stitle">Device approval</div>
+              <div class="ssub">Push to the registered device of the person being claimed.</div>
+              <div id="oobbox"></div></div>
+            <span class="sstate" id="L3s">not started</span></li>
+          <li id="L4"><span class="step">4</span>
+            <div><div class="stitle">Callback on the number on record</div>
+              <div class="ssub">Use when the device push goes unanswered.</div>
+              <div id="cbbox"></div></div>
+            <span class="sstate" id="L4s">not started</span></li>
+          <li id="L5"><span class="step">5</span>
+            <div><div class="stitle">Decision</div>
+              <div class="ssub">Block or clear. Either way it goes on the record.</div></div>
+            <span class="sstate" id="L5s">held</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>Risk trace</h2>
+        <span class="right" id="bandnote"></span></div>
+      <div class="pbody">
+        <div class="meterwrap">
+          <div class="meter" id="meter" role="img" aria-label="Risk meter">
+            <div class="zone-h" id="zh"></div><div class="zone-b" id="zb"></div><div class="zone-s" id="zs"></div>
+            <div class="needle" id="needle"></div>
+          </div>
+          <div class="meter-ticks" id="ticks"></div>
+          <div class="meter-legend">
+            <span><i class="swatch" style="background:var(--good-bg);border:1px solid var(--good-line)"></i>Reads genuine</span>
+            <span><i class="swatch" style="background:var(--warn-bg);border:1px solid var(--warn)"></i>Undecidable, measured for this carrier</span>
+            <span><i class="swatch" style="background:var(--crit-bg);border:1px solid var(--crit-line)"></i>Reads synthetic</span>
+          </div>
+        </div>
+        <div class="tracewrap">
+          <canvas id="trace" aria-label="Risk over the call"></canvas>
+          <div class="tip" id="tip"></div>
+        </div>
+        <canvas id="wave" hidden aria-hidden="true"></canvas>
+        <div class="kv" style="margin-top:12px"><span>Carrier on this call</span><b id="k-chan">&ndash;</b></div>
+        <div class="kv"><span>Threshold band measured for</span><b id="k-band">&ndash;</b></div>
+        <div class="kv"><span>Score refresh</span><b class="n" id="k-hop">&ndash;</b></div>
+        <div class="kv"><span>Earliest decision</span><b class="n" id="k-min">&ndash;</b></div>
+        <div class="kv"><span>Time to score one update</span><b class="n" id="k-lat">&ndash;</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:12px">
+    <div class="phead"><h2>Call record</h2>
+      <span class="right" id="chainhead">Nothing recorded yet</span></div>
+    <div class="pbody"><div class="strip" id="strip"><div class="empty">The record fills as the call proceeds.</div></div></div>
+  </div>
+</section>
+
+<!-- ================================================== AUDIT -->
+<section class="view" id="v-audit" role="tabpanel" aria-labelledby="tab-audit" hidden>
+  <div class="audit">
+    <div class="panel">
+      <div class="phead"><h2>Calls on record</h2>
+        <button class="iconbtn" id="refreshruns" style="margin-left:auto">Refresh</button></div>
+      <ul class="calllist" id="calllist"><li><div class="empty">Loading.</div></li></ul>
+    </div>
+    <div class="auditmain">
+      <div class="banner" id="chainbanner"><span class="bicon">&middot;</span><span id="chaintext">Select a call.</span>
+        <span class="bright">
+          <button class="btn sm" id="verifybtn" disabled>Verify chain</button>
+          <button class="btn sm" id="exportbtn" disabled>Export</button>
+        </span></div>
+      <div class="panel">
+        <div class="phead"><h2>Event log</h2><span class="right" id="logmeta"></span></div>
+        <div class="tablewrap">
+          <table id="logtable">
+            <thead><tr><th style="width:52px">#</th><th style="width:96px">Time</th><th style="width:120px">Actor</th>
+              <th style="width:170px">Event</th><th>Detail</th><th style="width:130px">Hash</th><th style="width:110px">Chain</th></tr></thead>
+            <tbody><tr><td colspan="7"><div class="empty">Select a call to see its event log.</div></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="integrity">
+        <span class="itxt">Integrity test: alter one recorded block in this view only, then verify. The stored chain is untouched.</span>
+        <span style="margin-left:auto;display:flex;gap:7px">
+          <button class="btn sm" id="alterbtn" disabled>Alter a block</button>
+          <button class="btn sm" id="restorebtn" disabled>Restore</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== EVIDENCE -->
+<section class="view" id="v-evidence" role="tabpanel" aria-labelledby="tab-evidence" hidden>
+  <div class="ev" id="ev"><div class="empty">Loading measurements.</div></div>
+</section>
+</main>
+
+<dialog id="aboutdlg" aria-labelledby="abouttitle">
+  <div class="dlghead"><h2 id="abouttitle">About this build</h2>
+    <button class="iconbtn" id="aboutclose" style="margin-left:auto">Close</button></div>
+  <div class="dlgbody" id="aboutbody"></div>
+</dialog>
+
+<div id="status" role="status" aria-live="polite" hidden></div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const fx = (x, d = 2) => (x === null || x === undefined || !isFinite(x)) ? null : Number(x).toFixed(d);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ---------------------------------------------------------------- state */
+const S = {
+  samples: [], conditions: [], hop: null, minCommit: null,
+  ws: null, run: null, live: false, ended: false,
+  trace: [], decidedAt: null, last: null, meta: null, cond: null, sampleFile: null,
+  player: null, mic: null, audioCtx: null, waveTimer: null,
+  audit: { runs: [], selected: null, blocks: null, pristine: null, altered: null }
+};
+
+function say(msg, bad) {
+  const el = $("status"); el.textContent = msg;
+  el.classList.toggle("bad", !!bad); el.hidden = false;
+  clearTimeout(say._t); say._t = setTimeout(() => { el.hidden = true; }, 5200);
+}
+
+/* ---------------------------------------------------------------- theme */
+(function theme() {
+  const saved = (() => { try { return localStorage.getItem("pramaan-theme"); } catch (e) { return null; } })();
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+  else document.documentElement.removeAttribute("data-theme");
+  const sync = () => {
+    const dark = document.documentElement.getAttribute("data-theme") === "dark" ||
+      (!document.documentElement.hasAttribute("data-theme") &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    $("themebtn").textContent = dark ? "Light" : "Dark";
+    $("themebtn").setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    return dark;
+  };
+  let dark = sync();
+  $("themebtn").onclick = () => {
+    dark = !dark;
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    try { localStorage.setItem("pramaan-theme", dark ? "dark" : "light"); } catch (e) { }
+    sync(); drawTrace();
+  };
+})();
+const ink = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* ---------------------------------------------------------------- tabs */
+const TABS = [...document.querySelectorAll('[role="tab"]')];
+function showView(name) {
+  TABS.forEach(t => {
+    const on = t.dataset.view === name;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+    t.tabIndex = on ? 0 : -1;
+    $("v-" + t.dataset.view).hidden = !on;
+  });
+  if (name === "evidence") loadEvidence();
+  if (name === "audit") loadRuns();
+  if (name === "live") drawTrace();
+}
+TABS.forEach((t, i) => {
+  t.onclick = () => showView(t.dataset.view);
+  t.onkeydown = e => {
+    const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : e.key === "Home" ? -i :
+      e.key === "End" ? TABS.length - 1 - i : 0;
+    if (!d) return;
+    e.preventDefault();
+    const n = TABS[(i + d + TABS.length) % TABS.length];
+    n.focus(); showView(n.dataset.view);
+  };
+});
+
+/* ---------------------------------------------------------------- scale
+   The commit band sits at P(synthetic) 0.010 to 0.014 on a clean line and at
+   0.036 to 0.500 on a 6.3 kbps line. On a linear 0 to 1 axis the clean band is
+   four tenths of one percent of the width, which is invisible, and every genuine
+   trace lies flat on the floor. The axis is therefore log-odds, symmetric about
+   0.5, which is the scale the thresholds were actually chosen on. */
+const LMAX = 9;
+const logit = p => Math.log(Math.min(Math.max(p, 1e-9), 1 - 1e-9) / (1 - Math.min(Math.max(p, 1e-9), 1 - 1e-9)));
+const pos = p => Math.min(1, Math.max(0, (logit(p) + LMAX) / (2 * LMAX)));
+const TICKS = [0.001, 0.01, 0.1, 0.5, 0.9, 0.99, 0.999];
+const tickLabel = p => p < 0.01 ? "0.001" : p < 0.1 ? "0.01" : p < 0.5 ? "0.1" : p === 0.5 ? "0.5" : p < 0.99 ? "0.9" : p < 0.999 ? "0.99" : "0.999";
+$("ticks").innerHTML = TICKS.map(p => `<span style="left:${(pos(p) * 100).toFixed(2)}%">${tickLabel(p)}</span>`).join("");
+
+/* ---------------------------------------------------------------- setup */
+const CARRIER = {
+  clean: "Clean line, no codec", opus_24k: "VoIP, Opus 24 kbps", opus_8k: "VoIP, Opus 8 kbps",
+  g722_64k: "HD voice, G.722", g726_32k: "Narrowband, G.726 32 kbps",
+  g723_1_6k3: "Narrowband, G.723.1 6.3 kbps", speex_wb_q4: "VoIP, Speex wideband"
+};
+const carrier = c => CARRIER[c] || c || "unknown carrier";
+
+async function getJSON(url, opts) {
+  const r = await fetch(url, opts);
+  if (!r.ok) throw new Error(`${r.status} on ${url}`);
+  return r.json();
+}
+
+async function init() {
+  try {
+    const r = await getJSON("/api/samples");
+    S.samples = r.samples || []; S.conditions = r.conditions || [];
+    S.hop = r.hop_s; S.minCommit = r.min_commit_s;
+    $("k-hop").textContent = S.hop != null ? `every ${S.hop} s` : "not reported";
+    $("k-min").textContent = S.minCommit != null ? `${S.minCommit} s` : "not reported";
+    $("src").innerHTML = '<option value="mic">Microphone on this laptop</option>' +
+      S.samples.map(x => `<option value="${esc(x.file)}">${esc(x.title || x.file)}</option>`).join("");
+    $("cond").innerHTML = S.conditions.map(c => `<option value="${esc(c)}">${esc(carrier(c))}</option>`).join("");
+    if (S.conditions.includes("opus_24k")) $("cond").value = "opus_24k";
+    describeLine();
+  } catch (e) {
+    say("Could not load the line list: " + e.message, true);
+  }
+  drawTrace();
+}
+function describeLine() {
+  const v = $("src").value, m = S.samples.find(x => x.file === v);
+  $("provenance").innerHTML = v === "mic"
+    ? "<b>Live</b> capture from this laptop, scored on this laptop."
+    : m ? `Recording origin: <b>${esc(m.origin)}</b>` : "";
+}
+$("src").onchange = () => { describeLine(); S.sampleWave = null; };
+init();
+
+/* ---------------------------------------------------------------- call lifecycle */
+function lineMeta() {
+  const v = $("src").value, m = S.samples.find(x => x.file === v) || {};
+  return {
+    caller: m.caller || { name: "Unidentified caller", claims: "identity not yet stated" },
+    action: m.action || {
+      what: "Approve outward transfer to a new beneficiary",
+      amount: "₹ 42,00,000", to: "to a beneficiary added 11 minutes ago"
+    },
+    language: m.language || "hindi", seed: m.seed == null ? null : m.seed
+  };
+}
+
+function resetCall(meta, cond) {
+  S.trace = []; S.decidedAt = null; S.commitRec = null; S.last = null; S.meta = meta; S.cond = cond;
+  S.ended = false; S.run = null;
+  $("who").textContent = meta.caller.name;
+  $("whosub").textContent = meta.caller.claims;
+  $("whometa").innerHTML = `<span>${esc(carrier(cond))}</span><span>${esc(meta.language)}</span>`;
+  $("ask").textContent = meta.action.what;
+  $("amount").textContent = meta.action.amount;
+  $("askto").textContent = meta.action.to || "";
+  $("k-chan").textContent = carrier(cond);
+  $("k-band").textContent = "–"; $("k-lat").textContent = "–";
+  $("v-p").textContent = "–"; $("v-dec").textContent = "–"; $("v-el").textContent = "0.0 s";
+  $("bandnote").textContent = "";
+  setHold("HELD", null);
+  setVerdict("DEFER", "Listening", `Collecting the first ${S.minCommit} s of audio. No decision is made before that.`);
+  ["L1", "L2", "L3", "L4", "L5"].forEach(i => { $(i).className = ""; });
+  $("L1").className = "active";
+  $("L1s").textContent = "listening"; $("L2s").textContent = "not started";
+  $("L3s").textContent = "not started"; $("L4s").textContent = "not started"; $("L5s").textContent = "held";
+  $("chalbox").innerHTML = ""; $("oobbox").innerHTML = ""; $("cbbox").innerHTML = "";
+  $("strip").innerHTML = '<div class="empty">The record fills as the call proceeds.</div>';
+  $("chainhead").textContent = "Nothing recorded yet";
+  $("meter").classList.remove("on");
+  $("needle").style.left = "0%"; $("zb").style.left = "0%"; $("zb").style.width = "0%";
+  $("zh").style.width = "0%"; $("zs").style.width = "0%";
+  setActions(false);
+  drawTrace();
+}
+
+function setActions(on) {
+  ["a-chal", "a-oob", "a-callback", "a-block", "a-clear"].forEach(i => { $(i).disabled = !on; });
+}
+
+function closeSocket() {
+  if (!S.ws) return;
+  const w = S.ws; S.ws = null;
+  w.onmessage = w.onclose = w.onerror = w.onopen = null;
+  try { if (w.readyState === 1) w.send("close"); } catch (e) { }
+  try { w.close(); } catch (e) { }
+}
+
+async function startCall() {
+  if (S.live) { say("A call is already running on this line. End it first."); return; }
+  const v = $("src").value, cond = $("cond").value, meta = lineMeta();
+  closeSocket(); stopMic(); stopPlayback();
+  resetCall(meta, cond);
+  S.live = true; S.sampleFile = v === "mic" ? null : v;
+  $("start").disabled = true; $("stop").disabled = false;
+  $("src").disabled = true; $("cond").disabled = true;
+
+  const proto = location.protocol === "https:" ? "wss" : "ws";
+  const ws = new WebSocket(`${proto}://${location.host}/ws/${v === "mic" ? "mic" : "file"}`);
+  S.ws = ws;
+  ws.onopen = async () => {
+    if (S.ws !== ws) return;
+    ws.send(JSON.stringify(v === "mic" ? { condition: cond, ...meta } : { file: v, condition: cond, ...meta }));
+    if (v === "mic") {
+      try { await startMic(ws); }
+      catch (e) {
+        say("The microphone is not available: " + (e && e.name ? e.name : e) +
+          ". Pick a recorded line instead.", true);
+        endCall();
+      }
+    } else {
+      playSample(v);
+    }
+  };
+  ws.onmessage = e => { if (S.ws === ws) onMsg(JSON.parse(e.data)); };
+  ws.onerror = () => { if (S.ws === ws) say("The connection to the scoring service failed.", true); };
+  ws.onclose = () => { if (S.ws === ws) { S.ws = null; finishCall("Connection closed."); } };
+}
+
+function endCall() { closeSocket(); finishCall("Call ended by the operator."); }
+
+function finishCall(note) {
+  if (!S.live && S.ended) return;
+  S.live = false; S.ended = true;
+  stopMic(); stopPlayback();
+  $("start").disabled = false; $("stop").disabled = true;
+  $("src").disabled = false; $("cond").disabled = false;
+  if (S.run) { setActions(true); }
+  if (S.last) {
+    $("vwhy").textContent = whyOf(S.last) + " " + note;
+  } else {
+    setVerdict("IDLE", "Idle", note);
+  }
+  recommend();
+}
+$("start").onclick = startCall;
+$("stop").onclick = endCall;
+
+/* ---------------------------------------------------------------- playback */
+function playSample(file) {
+  stopPlayback();
+  const a = new Audio("/api/sample/" + encodeURIComponent(file));
+  S.player = a;
+  a.play().catch(() => {
+    say("The browser blocked audio playback. Scoring is unaffected; press Start again to hear it.");
+  });
+}
+function stopPlayback() {
+  if (S.player) { try { S.player.pause(); } catch (e) { } S.player = null; }
+}
+
+/* ---------------------------------------------------------------- messages */
+function onMsg(m) {
+  if (m.type === "error") { say(m.detail || "The scoring service reported an error.", true); endCall(); return; }
+  if (m.type === "start") { S.run = m.run_id; setActions(true); return; }
+  if (m.type === "end") { finishCall("The recording finished and the record was written."); return; }
+  if (m.type !== "update") return;
+  S.trace.push(m); S.last = m;
+  render(m);
+}
+
+function setVerdict(cls, text, why) {
+  $("verdict").className = "verdict v-" + cls;
+  $("vtext").textContent = text;
+  if (why != null) $("vwhy").textContent = why;
+}
+const HOLD_TEXT = {
+  HELD: "Approval held until verified",
+  BLOCKED: "Blocked. Nothing moved.",
+  CLEARED: "Cleared. Approval released."
+};
+function setHold(t, acoustic) {
+  $("hold").className = "hold " + t;
+  $("hold").textContent = t === "HELD" && acoustic === "passed"
+    ? "Voice check passed. Device approval still required."
+    : HOLD_TEXT[t] || HOLD_TEXT.HELD;
+  $("L5s").textContent = t.toLowerCase();
+  $("L5").className = t === "CLEARED" ? "done" : t === "BLOCKED" ? "fail" : "";
+}
+
+/* The gate reports its reason in its own vocabulary. The operator gets the same facts,
+   built from the same fields, in the words the desk uses. Nothing here is invented:
+   every number below came off this update. */
+function whyOf(m) {
+  const p = fx(m.p, 3), lo = fx(m.tau_human, 3), hi = fx(m.tau_clone, 3);
+  const band = `the undecidable band ${lo} to ${hi}, measured for ${carrier(m.band_channel)}`;
+  if (m.committed) {
+    // The verdict is reported on the score it was taken on, never on the score that has
+    // drifted since. A committed call that drifts is still reported at both values.
+    const c = S.commitRec || m;
+    const cp = fx(c.p, 3);
+    const dir = m.state === "SYNTHETIC" ? `above ${fx(c.tau_clone, 3)}` : `below ${fx(c.tau_human, 3)}`;
+    const drift = (p !== cp) ? ` Risk now ${p}.` : "";
+    return `Committed at ${fx(S.decidedAt != null ? S.decidedAt : c.t, 1)} s on risk ${cp}, ${dir} for three updates. The gate does not reopen a verdict.${drift}`;
+  }
+  if (m.t < S.minCommit) return `Heard ${fx(m.t, 1)} s. Nothing is decided before ${S.minCommit} s of audio.`;
+  if (!m.stable) return `Risk ${p}. The score has not settled across enough updates to commit.`;
+  return `Risk ${p} sits inside ${band}. The gate will not guess.`;
+}
+
+function render(m) {
+  $("v-el").textContent = fx(m.t, 1) + " s";
+  $("v-p").textContent = fx(m.p, 3);
+  $("k-lat").textContent = m.latency_ms != null ? fx(m.latency_ms, 0) + " ms" : "not reported";
+  $("k-band").textContent = carrier(m.band_channel);
+  if (m.band_channel && S.cond && m.band_channel !== S.cond) {
+    $("bandnote").textContent = "Band falls back to " + carrier(m.band_channel);
+  }
+  // meter zones from the band this call is actually using
+  const lo = pos(m.tau_human) * 100, hi = pos(m.tau_clone) * 100;
+  $("zh").style.width = lo + "%";
+  $("zb").style.left = lo + "%"; $("zb").style.width = Math.max(0.4, hi - lo) + "%";
+  $("zs").style.width = (100 - hi) + "%";
+  $("needle").style.left = (pos(m.p) * 100) + "%";
+  $("meter").classList.add("on");
+
+  if (m.state === "DEFER") {
+    setVerdict("DEFER", m.t < S.minCommit ? "Listening" : "Not decidable", whyOf(m));
+  } else {
+    setVerdict(m.state, m.state === "HUMAN" ? "Reads genuine" : "Reads synthetic", whyOf(m));
+  }
+  if (m.committed && S.decidedAt === null) {
+    S.decidedAt = m.t; S.commitRec = m;
+    $("v-dec").textContent = fx(m.t, 1) + " s";
+    $("L1").className = m.state === "SYNTHETIC" ? "fail" : "done";
+    $("L1s").textContent = m.state === "HUMAN" ? "genuine" : "synthetic";
+  } else if (!m.committed && m.t >= S.minCommit) {
+    $("L1s").textContent = "not decidable";
+  }
+  setHold(m.transaction, m.acoustic);
+  if (m.challenge) renderChallenge(m.challenge, m.t);
+  if (m.oob) renderOob(m.oob);
+  if (m.callback) renderCallback(m.callback);
+  if (m.ledger_len !== render._len) { render._len = m.ledger_len; refreshStrip(); }
+  $("chainhead").textContent = `${m.ledger_len} blocks, head ${m.ledger_head}`;
+  recommend();
+  drawTrace();
+}
+
+/* ---------------------------------------------------------------- recommendation
+   Every branch below is a function of state the server sent. Nothing is guessed. */
+function recommend() {
+  const m = S.last, t = $("nexttitle");
+  if (!m) { t.textContent = S.live ? "Listening. Wait for the first score." : "Start monitoring the line."; return; }
+  if (m.transaction === "BLOCKED") { t.textContent = "Blocked, and the block is on the record. Call back on the number on file before releasing anything."; return; }
+  if (m.transaction === "CLEARED") { t.textContent = "Cleared. The approval is released and the decision is on the record."; return; }
+  if (m.oob && m.oob.state === "PENDING") { t.textContent = "Waiting on the registered device. Do not clear until it answers."; return; }
+  if (m.challenge && m.challenge.state === "ISSUED") { t.textContent = "Read the challenge phrase aloud and wait for the caller to repeat it."; return; }
+  if (m.challenge && m.challenge.verdict === "ESCALATE") { t.textContent = "The challenge response was not decidable. Send the device push."; return; }
+  if (!m.committed && m.t < S.minCommit) { t.textContent = `Hold. The detector will not decide before ${S.minCommit} s of audio.`; return; }
+  if (!m.committed) { t.textContent = "The score sits inside the undecidable band. Issue the live challenge."; return; }
+  if (m.state === "SYNTHETIC") { t.textContent = "Synthetic voice on a high-value request. The transfer is already held; confirm the block."; return; }
+  t.textContent = "Voice check passed, which is one factor. Send the device push before clearing.";
+}
+
+/* ---------------------------------------------------------------- ladder cards */
+function renderChallenge(c, now) {
+  const L = $("L2"), box = $("chalbox");
+  const spaceLine = c.space
+    ? `one of ${Number(c.space).toLocaleString("en-US")} phrases, id ${esc(c.challenge_id)}`
+    : `id ${esc(c.challenge_id)}`;
+  if (c.state === "ISSUED") {
+    const expired = now != null && c.deadline_s != null && now > c.deadline_s;
+    L.className = expired ? "fail" : "active";
+    $("L2s").textContent = expired ? "no answer" : "read it aloud";
+    box.innerHTML = `<div class="readout"><div class="rlbl">Say this to the caller</div>
+      <div class="phrase">${esc(c.text)}</div>
+      <div class="rfoot">${spaceLine}${c.deadline_s != null ? ` &middot; answer due by ${fx(c.deadline_s, 1)} s` : ""}</div></div>`;
+  } else if (c.state === "ANSWERED") {
+    const v = c.verdict;
+    L.className = v === "HUMAN" ? "done" : v === "SYNTHETIC" ? "fail" : "active";
+    $("L2s").textContent = v === "ESCALATE" ? "not decidable" : v === "HUMAN" ? "answered by a person" : "answered synthetic";
+    box.innerHTML = `<div class="readout"><div class="rlbl">Response scored separately</div>
+      <div class="phrase">${esc(c.text)}</div>
+      <div class="rfoot">risk on the response ${fx(c.p_response, 3) ?? "not scored"}</div></div>`;
+    if (v === "ESCALATE" && $("L3").className === "") { $("L3").className = "active"; $("L3s").textContent = "needed now"; }
+  } else if (c.state === "TIMEOUT") {
+    L.className = "fail"; $("L2s").textContent = "no answer";
+    box.innerHTML = `<div class="readout"><div class="rlbl">No answer inside the deadline</div>
+      <div class="phrase">${esc(c.text)}</div></div>`;
+  }
+}
+
+function renderOob(o) {
+  const L = $("L3");
+  if (o.state === "PENDING") {
+    L.className = "active"; $("L3s").textContent = "sent, awaiting";
+    $("oobbox").innerHTML = `<div class="device"><div class="dhead"><span>Registered device, simulated</span><span>${esc(o.device)}</span></div>
+      <div class="dmsg">A caller using your voice is asking to approve <b>${esc($("amount").textContent)}</b>. Approve only if this is you. Code <b class="code">${esc(o.code)}</b></div>
+      <div class="drow"><button class="btn sm good" data-oob="1">It is me, approve</button>
+      <button class="btn sm crit" data-oob="0">Not me</button></div></div>`;
+    $("oobbox").querySelectorAll("[data-oob]").forEach(b =>
+      b.onclick = () => act("oob_resolve", { approved: b.dataset.oob === "1" }));
+  } else {
+    L.className = o.state === "APPROVED" ? "done" : "fail";
+    $("L3s").textContent = o.state === "APPROVED" ? "approved on device" : "denied on device";
+    $("oobbox").innerHTML = `<div class="device"><div class="dhead"><span>Registered device</span><span>${esc(o.state)}</span></div>
+      <div class="dmsg">${o.state === "APPROVED"
+        ? "The person being claimed confirmed on their own device."
+        : "The person being claimed says this is not them. The call was an impersonation."}</div></div>`;
+  }
+}
+
+function renderCallback(cb) {
+  $("L4").className = "done"; $("L4s").textContent = "logged";
+  $("cbbox").innerHTML = `<div class="readout"><div class="rlbl">Callback logged at ${fx(cb.at_s, 1)} s into the call</div>
+    <div style="font-size:13px">${esc(cb.note)}</div></div>`;
+}
+
+/* ---------------------------------------------------------------- operator actions */
+async function act(action, extra) {
+  if (!S.run) { say("There is no call to act on."); return; }
+  let r;
+  try {
+    r = await getJSON(`/api/call/${encodeURIComponent(S.run)}/action`, {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ action, ...(extra || {}) })
+    });
+  } catch (e) { say("That action did not reach the server: " + e.message, true); return; }
+  if (r.error) { say(r.error, true); return; }
+  const res = r.result || {};
+  if (action === "challenge") renderChallenge(res, S.last ? S.last.t : null);
+  if (action === "oob_send" || action === "oob_resolve") renderOob(res.state ? res : (res.oob || res));
+  if (action === "callback" && res.callback) renderCallback(res.callback);
+  if (r.transaction) setHold(r.transaction, S.last ? S.last.acoustic : null);
+  // Fold the result back into the last known state so the recommendation, which is a pure
+  // function of that state, reflects the step the operator just took.
+  if (S.last) {
+    S.last = { ...S.last, transaction: r.transaction };
+    if (action === "challenge") S.last.challenge = res;
+    if (action === "oob_send" || action === "oob_resolve") S.last.oob = res.state ? res : S.last.oob;
+    if (action === "callback" && res.callback) S.last.callback = res.callback;
+  }
+  $("chainhead").textContent = `${r.ledger_len} blocks, head ${r.ledger_head}`;
+  recommend(); refreshStrip();
+}
+$("a-chal").onclick = () => act("challenge");
+$("a-oob").onclick = () => act("oob_send", { device: "+91 xxxxx 4821" });
+$("a-callback").onclick = () => act("callback");
+$("a-block").onclick = () => act("block");
+$("a-clear").onclick = () => act("clear");
+
+async function refreshStrip() {
+  if (!S.run) return;
+  let L;
+  try { L = await getJSON("/api/ledger/" + encodeURIComponent(S.run)); }
+  catch (e) { return; }
+  if (!L.blocks || !L.blocks.length) return;
+  $("strip").innerHTML = L.blocks.slice(-14).map(b =>
+    `<div class="blk ${esc(b.event)}"><div class="be">${b.index} ${esc(b.event.replace(/_/g, " "))}</div>
+     <div class="bh">${esc(b.hash.slice(0, 18))}</div></div>`).join("");
+  $("strip").scrollLeft = 1e6;
+}
+
+/* ---------------------------------------------------------------- microphone */
+async function startMic(ws) {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
+  });
+  S.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const src = S.audioCtx.createMediaStreamSource(stream);
+  const proc = S.audioCtx.createScriptProcessor(4096, 1, 1);
+  const ratio = S.audioCtx.sampleRate / 16000;
+  proc.onaudioprocess = e => {
+    const x = e.inputBuffer.getChannelData(0);
+    const n = Math.floor(x.length / ratio), y = new Float32Array(n);
+    for (let i = 0; i < n; i++) y[i] = x[Math.floor(i * ratio)];
+    drawWave(y);
+    if (ws.readyState === 1) ws.send(y.buffer);
+  };
+  src.connect(proc); proc.connect(S.audioCtx.destination);
+  S.mic = { stream, proc };
+  $("wave").hidden = false;
+}
+function stopMic() {
+  if (S.mic) {
+    S.mic.stream.getTracks().forEach(t => t.stop());
+    try { S.mic.proc.disconnect(); S.mic.proc.onaudioprocess = null; } catch (e) { }
+    S.mic = null;
+  }
+  if (S.audioCtx) { try { S.audioCtx.close(); } catch (e) { } S.audioCtx = null; }
+  $("wave").hidden = true;
+}
+
+/* ---------------------------------------------------------------- drawing */
+function ctx2d(c) {
+  const r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+  const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+  if (c.width !== w * d || c.height !== h * d) { c.width = w * d; c.height = h * d; }
+  const g = c.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0); g.clearRect(0, 0, w, h);
+  return [g, w, h];
+}
+
+function drawTrace() {
+  const [g, W, H] = ctx2d($("trace"));
+  const padL = 40, padR = 12, padT = 10, padB = 22;
+  const w = W - padL - padR, h = H - padT - padB;
+  if (w <= 0 || h <= 0) return;
+  const tmax = Math.max(8, S.trace.length ? S.trace[S.trace.length - 1].t + 1 : 8);
+  const X = t => padL + (t / tmax) * w;
+  const Y = p => padT + (1 - pos(p)) * h;
+  const cLine = ink("--line"), cMuted = ink("--ink-muted"), cStrong = ink("--line-strong");
+
+  g.font = '10px ui-monospace, "SF Mono", Menlo, monospace';
+  g.textAlign = "right"; g.textBaseline = "middle";
+  TICKS.forEach(p => {
+    g.strokeStyle = cLine; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(padL, Y(p) + .5); g.lineTo(W - padR, Y(p) + .5); g.stroke();
+    g.fillStyle = cMuted; g.fillText(tickLabel(p), padL - 6, Y(p));
+  });
+  g.textAlign = "center"; g.textBaseline = "alphabetic";
+  for (let t = 0; t <= tmax; t += Math.max(2, Math.round(tmax / 8))) g.fillText(t + "s", X(t), H - 6);
+
+  if (S.minCommit != null) {
+    g.strokeStyle = cStrong; g.setLineDash([2, 3]);
+    g.beginPath(); g.moveTo(X(S.minCommit), padT); g.lineTo(X(S.minCommit), padT + h); g.stroke();
+    g.setLineDash([]);
+    g.fillStyle = cMuted; g.textAlign = "left";
+    g.fillText("earliest decision", X(S.minCommit) + 4, padT + 9);
+  }
+  if (!S.trace.length) return;
+
+  const last = S.trace[S.trace.length - 1];
+  g.fillStyle = ink("--warn-bg");
+  g.fillRect(padL, Y(last.tau_clone), w, Math.max(1, Y(last.tau_human) - Y(last.tau_clone)));
+  g.strokeStyle = ink("--warn"); g.setLineDash([3, 3]); g.lineWidth = 1;
+  [last.tau_clone, last.tau_human].forEach(v => {
+    g.beginPath(); g.moveTo(padL, Y(v) + .5); g.lineTo(W - padR, Y(v) + .5); g.stroke();
+  });
+  g.setLineDash([]);
+
+  const col = last.state === "SYNTHETIC" ? ink("--crit") : last.state === "HUMAN" ? ink("--good") : ink("--warn");
+  g.beginPath();
+  S.trace.forEach((m, i) => i ? g.lineTo(X(m.t), Y(m.p)) : g.moveTo(X(m.t), Y(m.p)));
+  g.strokeStyle = col; g.lineWidth = 2; g.lineJoin = "round"; g.stroke();
+  S.trace.forEach(m => {
+    if (!m.event) return;
+    g.fillStyle = ink("--surface"); g.beginPath(); g.arc(X(m.t), Y(m.p), 5.5, 0, 7); g.fill();
+    g.fillStyle = col; g.beginPath(); g.arc(X(m.t), Y(m.p), 3.5, 0, 7); g.fill();
+  });
+  if (S.decidedAt !== null) {
+    g.strokeStyle = col; g.setLineDash([2, 3]);
+    g.beginPath(); g.moveTo(X(S.decidedAt), padT); g.lineTo(X(S.decidedAt), padT + h); g.stroke();
+    g.setLineDash([]);
+  }
+  drawTrace._geom = { padL, padR, padT, padB, w, h, tmax, W, H };
+}
+
+$("trace").addEventListener("mousemove", e => {
+  const G = drawTrace._geom; const tip = $("tip");
+  if (!G || !S.trace.length) { tip.style.display = "none"; return; }
+  const r = e.currentTarget.getBoundingClientRect();
+  const x = e.clientX - r.left;
+  const t = ((x - G.padL) / G.w) * G.tmax;
+  let best = S.trace[0];
+  S.trace.forEach(m => { if (Math.abs(m.t - t) < Math.abs(best.t - t)) best = m; });
+  tip.style.display = "block";
+  tip.innerHTML = `<b>${fx(best.t, 1)} s</b> &nbsp; risk <b>${fx(best.p, 3)}</b><br>${esc(best.state === "DEFER" ? "not decidable yet" : best.state === "HUMAN" ? "reads genuine" : "reads synthetic")}`;
+  const tx = G.padL + (best.t / G.tmax) * G.w;
+  tip.style.left = Math.min(r.width - tip.offsetWidth - 4, Math.max(0, tx + 10)) + "px";
+  tip.style.top = Math.max(0, G.padT + (1 - pos(best.p)) * G.h - 44) + "px";
+});
+$("trace").addEventListener("mouseleave", () => { $("tip").style.display = "none"; });
+
+let waveBuf = new Float32Array(16000 * 2);
+function drawWave(chunk) {
+  if (chunk && chunk.length) {
+    const n = Math.min(chunk.length, waveBuf.length);
+    waveBuf.copyWithin(0, n);
+    waveBuf.set(chunk.subarray(chunk.length - n), waveBuf.length - n);
+  }
+  const c = $("wave"); if (c.hidden) return;
+  const [g, W, H] = ctx2d(c);
+  g.strokeStyle = ink("--ink-2"); g.lineWidth = 1;
+  const step = Math.max(1, Math.floor(waveBuf.length / W));
+  g.beginPath();
+  for (let x = 0; x < W; x++) {
+    let mx = 0;
+    for (let i = x * step; i < (x + 1) * step && i < waveBuf.length; i++) mx = Math.max(mx, Math.abs(waveBuf[i]));
+    g.moveTo(x + .5, H / 2 - mx * H * .9 / 2); g.lineTo(x + .5, H / 2 + mx * H * .9 / 2);
+  }
+  g.stroke();
+}
+
+let resizeT = null;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeT);
+  resizeT = setTimeout(() => { drawTrace(); drawWave(null); }, 120);
+});
+
+/* ================================================================ AUDIT */
+const ACTOR = {
+  call_opened: "System", score: "Voice check", gate_committed: "Voice check",
+  acoustic_pass: "Voice check", challenge_issued: "Operator", challenge_answered: "Caller",
+  challenge_timeout: "Caller", oob_sent: "Operator", oob_resolved: "Registered device",
+  callback_requested: "Operator"
+};
+function actorOf(b) {
+  if (b.event.startsWith("transaction_")) {
+    const why = (b.data && b.data.why) || "";
+    return why.startsWith("operator:") ? "Operator" : "System";
+  }
+  return ACTOR[b.event] || "System";
+}
+const EVENT_NAME = {
+  call_opened: "Call opened", score: "Score update", gate_committed: "Voice verdict committed",
+  acoustic_pass: "Voice check passed", challenge_issued: "Challenge issued",
+  challenge_answered: "Challenge answered", challenge_timeout: "Challenge timed out",
+  oob_sent: "Device push sent", oob_resolved: "Device push answered",
+  callback_requested: "Callback logged", transaction_blocked: "Transaction blocked",
+  transaction_cleared: "Transaction cleared"
+};
+function detailOf(b) {
+  const d = b.data || {};
+  switch (b.event) {
+    case "call_opened": return `${carrier(d.channel)}, ${d.language || "language not set"}, band measured for ${carrier(d.band_derived_for)}`;
+    case "score": return `risk ${fx(d.p, 3)} at ${fx(d.t, 1)} s, gate ${String(d.state || "").toLowerCase()}`;
+    case "gate_committed": return `${String(d.state || "").toLowerCase()} at ${fx(d.t, 1)} s, risk ${fx(d.p, 3)}`;
+    case "acoustic_pass": return d.note || "";
+    case "challenge_issued": return d.text || "";
+    case "challenge_answered": return `verdict ${String(d.verdict || "").toLowerCase()}, risk on the response ${fx(d.p_response, 3)}`;
+    case "oob_sent": return `to ${d.device}, code digest ${d.code_digest}`;
+    case "oob_resolved": return `answered ${String(d.state || "").toLowerCase()}`;
+    case "callback_requested": return d.note || "";
+    default:
+      if (d.why) return d.why;
+      const ks = Object.keys(d);
+      return ks.length ? ks.map(k => `${k} ${typeof d[k] === "object" ? JSON.stringify(d[k]) : d[k]}`).join(", ") : "";
+  }
+}
+const hhmmss = ts => {
+  const dt = new Date(ts * 1000);
+  return String(dt.getHours()).padStart(2, "0") + ":" + String(dt.getMinutes()).padStart(2, "0") +
+    ":" + String(dt.getSeconds()).padStart(2, "0");
+};
+
+async function loadRuns() {
+  let r;
+  try { r = await getJSON("/api/runs"); }
+  catch (e) { $("calllist").innerHTML = `<li><div class="err">Could not load the call list: ${esc(e.message)}</div></li>`; return; }
+  S.audit.runs = r.runs || [];
+  if (!S.audit.runs.length) {
+    $("calllist").innerHTML = '<li><div class="empty">No calls on record yet. Run a call on the Live tab.</div></li>';
+    return;
+  }
+  $("calllist").innerHTML = S.audit.runs.map(x => `<li><button type="button" data-run="${esc(x.run_id)}"
+      aria-current="${x.run_id === S.audit.selected ? "true" : "false"}">
+      <div class="cl-top"><span class="cl-name">${esc(x.caller || "Unidentified caller")}</span>
+        <span class="cl-time">${x.opened_ts ? hhmmss(x.opened_ts) : ""}</span></div>
+      <div class="cl-sub">${esc(carrier(x.channel))} &middot; ${x.blocks} blocks</div>
+      <div style="margin-top:5px;display:flex;gap:5px">
+        <span class="tag ${esc(x.transaction || "")}">${esc((x.transaction || "unknown").toLowerCase())}</span>
+        ${x.live ? '<span class="tag live">live</span>' : ""}</div></button></li>`).join("");
+  $("calllist").querySelectorAll("[data-run]").forEach(b => b.onclick = () => selectRun(b.dataset.run));
+  const want = S.audit.selected && S.audit.runs.some(x => x.run_id === S.audit.selected)
+    ? S.audit.selected : S.audit.runs[0].run_id;
+  selectRun(want);
+}
+$("refreshruns").onclick = loadRuns;
+
+async function selectRun(id) {
+  S.audit.selected = id;
+  $("calllist").querySelectorAll("[data-run]").forEach(b =>
+    b.setAttribute("aria-current", b.dataset.run === id ? "true" : "false"));
+  let L;
+  try { L = await getJSON("/api/ledger/" + encodeURIComponent(id)); }
+  catch (e) { setBanner(null, "Could not load that chain: " + e.message); return; }
+  if (L.error) { setBanner(null, L.error); return; }
+  S.audit.pristine = JSON.parse(JSON.stringify(L.blocks));
+  S.audit.blocks = JSON.parse(JSON.stringify(L.blocks));
+  S.audit.altered = null;
+  ["verifybtn", "exportbtn", "alterbtn"].forEach(i => { $(i).disabled = false; });
+  $("restorebtn").disabled = true;
+  $("logmeta").textContent = `${L.blocks.length} blocks, call ${id}`;
+  setBanner(L.verify); renderLog(L.verify);
+}
+
+function setBanner(v, msg) {
+  const b = $("chainbanner"), t = $("chaintext");
+  b.className = "banner";
+  if (msg) { b.classList.add("bad"); b.querySelector(".bicon").textContent = "!"; t.textContent = msg; return; }
+  if (!v) { b.querySelector(".bicon").textContent = "·"; t.textContent = "Select a call."; return; }
+  if (v.valid) {
+    b.classList.add("ok"); b.querySelector(".bicon").textContent = "✓";
+    t.innerHTML = `Chain verified. <b>${v.length}</b> blocks link back to the opening block, head <span class="n">${esc((v.head || "").slice(0, 16))}</span>.`;
+  } else {
+    b.classList.add("bad"); b.querySelector(".bicon").textContent = "✕";
+    t.innerHTML = `Chain broken at block <b>${v.broken_at}</b>. Every block after it is unverifiable.`;
+  }
+}
+
+function renderLog(verify) {
+  const blocks = S.audit.blocks || [];
+  const broken = verify && !verify.valid ? verify.broken_at : null;
+  const tb = $("logtable").querySelector("tbody");
+  if (!blocks.length) { tb.innerHTML = '<tr><td colspan="7"><div class="empty">This call has no blocks.</div></td></tr>'; return; }
+  tb.innerHTML = blocks.map(b => {
+    const isAltered = S.audit.altered === b.index;
+    const cls = broken !== null && b.index > broken ? "downstream" : isAltered ? "altered" : "";
+    const chain = broken === null ? '<span class="chaincell linked">linked</span>'
+      : b.index < broken ? '<span class="chaincell linked">linked</span>'
+        : b.index === broken ? '<span class="chaincell broken">broken here</span>'
+          : '<span class="chaincell unver">unverifiable</span>';
+    return `<tr class="${cls}"><td class="mono">${b.index}</td><td class="mono">${hhmmss(b.ts)}</td>
+      <td class="actor">${esc(actorOf(b))}</td>
+      <td class="evname">${esc(EVENT_NAME[b.event] || b.event.replace(/_/g, " "))}</td>
+      <td>${esc(detailOf(b))}</td>
+      <td class="mono" title="${esc(b.hash)}">${esc(b.hash.slice(0, 12))}</td>
+      <td>${chain}</td></tr>`;
+  }).join("");
+}
+
+$("verifybtn").onclick = async () => {
+  if (!S.audit.blocks) return;
+  let v;
+  try {
+    v = await getJSON("/api/ledger/verify", {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ blocks: S.audit.blocks })
+    });
+  } catch (e) { setBanner(null, "Verification could not reach the server: " + e.message); return; }
+  setBanner(v); renderLog(v);
+  say(v.valid ? "Chain verified." : "Chain broken at block " + v.broken_at + ".", !v.valid);
+};
+
+$("exportbtn").onclick = () => {
+  if (!S.audit.blocks) return;
+  const payload = JSON.stringify({ run_id: S.audit.selected, blocks: S.audit.blocks }, null, 1);
+  const url = URL.createObjectURL(new Blob([payload], { type: "application/json" }));
+  const a = document.createElement("a");
+  a.href = url; a.download = S.audit.selected + "-chain.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  say("Chain exported as " + S.audit.selected + "-chain.json");
+};
+
+$("alterbtn").onclick = () => {
+  const bs = S.audit.blocks;
+  if (!bs || bs.length < 3) { say("This call is too short to alter a middle block."); return; }
+  const i = Math.min(2, bs.length - 1);
+  bs[i] = { ...bs[i], data: { ...bs[i].data, p: 0.01, note: "risk lowered after the fact" } };
+  S.audit.altered = bs[i].index;
+  $("restorebtn").disabled = false;
+  renderLog();
+  setBanner(null, `Block ${i} was altered in this view. The stored chain is unchanged. Press Verify chain.`);
+};
+
+$("restorebtn").onclick = () => {
+  if (!S.audit.pristine) return;
+  S.audit.blocks = JSON.parse(JSON.stringify(S.audit.pristine));
+  S.audit.altered = null;
+  $("restorebtn").disabled = true;
+  renderLog();
+  say("View restored to the stored chain. Press Verify chain.");
+};
+
+/* ================================================================ EVIDENCE */
+const GEN_LABEL = {
+  xtts_v2: "XTTS-v2, autoregressive TTS", freevc24: "FreeVC, voice conversion",
+  encodec: "EnCodec, neural codec", mac_say: "Apple on-device TTS",
+  mms_vits: "Meta MMS, VITS", kokoro: "Kokoro-82M", espeak_ng: "eSpeak NG, formant synthesis",
+  piper: "Piper", chatterbox: "Chatterbox 2025, held out of training"
+};
+const COND_SHORT = {
+  clean: "clean", opus_24k: "Opus 24k", opus_8k: "Opus 8k", g722_64k: "G.722",
+  g726_32k: "G.726", g723_1_6k3: "G.723.1", speex_wb_q4: "Speex"
+};
+const SEQ = ["--seq-1", "--seq-2", "--seq-3", "--seq-4", "--seq-5", "--seq-6"];
+function seqStep(e) {
+  if (e == null) return null;
+  const t = Math.min(1, Math.max(0, e / 0.5));
+  return Math.min(SEQ.length - 1, Math.floor(t * SEQ.length));
+}
+
+let evidenceLoaded = false;
+async function loadEvidence() {
+  if (evidenceLoaded) return;
+  const ev = $("ev");
+  let R = {}, lat = {};
+  try { R = await getJSON("/api/results"); } catch (e) { R = { error: e.message }; }
+  try { lat = await getJSON("/api/latency"); } catch (e) { lat = {}; }
+  if (R.error) { ev.innerHTML = `<div class="err">Measurements are not available: ${esc(R.error)}</div>`; return; }
+  /* Panels are built into named slots, then composed into three bands. A slot
+     that this build did not measure simply stays empty and its band closes up. */
+  const P = {};
+
+  if (R.generator_matrix) {
+    const gens = Object.keys(R.generator_matrix);
+    const conds = Object.keys(R.generator_matrix[gens[0]].per_condition || {});
+    let h = `<div class="panel"><div class="phead"><h2>Error rate on a generator family held out of training</h2></div><div class="pbody">
+      <div class="heat" style="grid-template-columns:250px repeat(${conds.length},minmax(52px,1fr))"><div></div>` +
+      conds.map(c => `<div class="hh">${esc(COND_SHORT[c] || c)}</div>`).join("");
+    gens.forEach(gname => {
+      h += `<div class="hr">${esc(GEN_LABEL[gname] || gname)}</div>` + conds.map(c => {
+        const cell = R.generator_matrix[gname].per_condition[c];
+        const e = cell ? cell.eer : null;
+        const s = seqStep(e);
+        if (s === null) return `<div class="hc" style="background:var(--surface-2);color:var(--ink-muted)" title="not measured">&ndash;</div>`;
+        const fg = s >= 3 ? "var(--seq-ink-light)" : "var(--seq-ink-dark)";
+        return `<div class="hc" style="background:var(${SEQ[s]});color:${fg}"
+          title="${esc(GEN_LABEL[gname] || gname)} on ${esc(COND_SHORT[c] || c)}: equal error rate ${(e * 100).toFixed(1)} percent">${(e * 100).toFixed(1)}</div>`;
+      }).join("");
+    });
+    h += `</div><div class="ramp">0%<i style="background:var(--seq-1)"></i><i style="background:var(--seq-2)"></i><i style="background:var(--seq-3)"></i><i style="background:var(--seq-4)"></i><i style="background:var(--seq-5)"></i><i style="background:var(--seq-6)"></i>50% and above</div>
+      <div class="foot">Equal error rate in percent. Each row trains on every other generator family and never sees this one. Genuine speech is FLEURS Hindi, Tamil and Telugu, held-out clips. Lower is better; 50 percent is a coin toss.</div></div></div>`;
+    P.matrix = h;
+  }
+
+  if (R.diversity_curve && R.diversity_curve.curve) {
+    const c = R.diversity_curve.curve;
+    const W = 560, H = 325, pl = 52, pr = 18, pt = 22, pb = 48;
+    const X = k => pl + (k - 1) / ((c.length - 1) || 1) * (W - pl - pr);
+    const Y = e => pt + (1 - e / 0.5) * (H - pt - pb);
+    const acc = ink("--accent"), mut = ink("--ink-muted"), lin = ink("--line"), ik = ink("--ink");
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Error rate against the number of generator families in training">`;
+    [0, .1, .2, .3, .4, .5].forEach(e =>
+      svg += `<line x1="${pl}" x2="${W - pr}" y1="${Y(e)}" y2="${Y(e)}" stroke="${lin}"/>` +
+        `<text x="${pl - 8}" y="${Y(e) + 4}" font-size="11" text-anchor="end" fill="${mut}">${(e * 100) | 0}%</text>`);
+    svg += `<polygon points="${c.map(p => X(p.k) + "," + Y(p.eer_min)).join(" ")} ${[...c].reverse().map(p => X(p.k) + "," + Y(p.eer_max)).join(" ")}" fill="${acc}" fill-opacity=".12"/>`;
+    svg += `<polyline points="${c.map(p => X(p.k) + "," + Y(p.eer_mean)).join(" ")}" fill="none" stroke="${acc}" stroke-width="2" stroke-linejoin="round"/>`;
+    c.forEach((p, i) => {
+      svg += `<circle cx="${X(p.k)}" cy="${Y(p.eer_mean)}" r="4" fill="${acc}" stroke="${ink("--surface")}" stroke-width="2"><title>${p.k} families: mean ${(p.eer_mean * 100).toFixed(1)} percent, range ${(p.eer_min * 100).toFixed(1)} to ${(p.eer_max * 100).toFixed(1)}</title></circle>`;
+      if (i === 0 || i === c.length - 1) {
+        /* Anchor the two direct labels inward so neither collides with the y axis
+           tick on the left nor runs off the plot on the right. */
+        const first = i === 0;
+        svg += `<text x="${X(p.k) + (first ? 8 : -4)}" y="${Y(p.eer_mean) - 11}" font-size="11.5" text-anchor="${first ? "start" : "end"}" fill="${ik}">${(p.eer_mean * 100).toFixed(1)}%</text>`;
+      }
+      svg += `<text x="${X(p.k)}" y="${H - 20}" font-size="11" text-anchor="middle" fill="${mut}">${p.k}</text>`;
+    });
+    svg += `<text x="${(pl + W - pr) / 2}" y="${H - 4}" font-size="11" text-anchor="middle" fill="${mut}">generator families seen in training</text></svg>`;
+    P.diversity = `<div class="panel"><div class="phead"><h2>Error rate against training diversity, on a cloner never seen</h2></div>
+      <div class="pbody">${svg}<div class="foot">Mean over random subsets of k training families; the shaded band is the min to max across those subsets. The held-out cloner clones the exact genuine recordings it is scored against, so speaker, sentence and microphone cannot be the tell.</div></div></div>`;
+  }
+
+  if (R.streaming && R.streaming.per_prefix) {
+    const pp = R.streaming.per_prefix, ks = Object.keys(pp);
+    let h = `<div class="panel"><div class="phead"><h2>How the error rate falls as more audio arrives</h2></div><div class="pbody">
+      <table><thead><tr><th>Audio heard</th><th>Generators seen in training</th><th>Cloner held out</th></tr></thead><tbody>` +
+      ks.map(k => `<tr><td class="mono">${Number(k).toFixed(1)} s</td>
+        <td class="mono">${pp[k].seen ? (pp[k].seen.eer * 100).toFixed(1) + "%" : "not measured"}</td>
+        <td class="mono">${pp[k].unseen ? (pp[k].unseen.eer * 100).toFixed(1) + "%" : "not measured"}</td></tr>`).join("") +
+      `</tbody></table>`;
+    const g = R.streaming.gate_replay && R.streaming.gate_replay.seen;
+    if (g) h += `<div class="foot">Replaying the gate on generators it has seen, clean line: it commits on ${(g.coverage * 100).toFixed(1)} percent of calls, is wrong on ${(g.committed_error * 100).toFixed(1)} percent of the calls it commits on, raises a false alarm on ${(g.false_positive_rate * 100).toFixed(1)} percent of genuine speech, and decides at ${g.median_time_to_decision_s} s in the median.</div>`;
+    P.streaming = h + "</div></div>";
+  }
+
+  if (lat.rows && lat.rows.length) {
+    const capKeys = Object.keys(lat.capacity || {});
+    const cpu1 = (lat.capacity || {})["cpu_hop_1.0"] || (lat.capacity || {})[capKeys.find(k => k.startsWith("cpu_hop_1")) || ""];
+    let h = `<div class="panel"><div class="phead"><h2>Scoring cost on this laptop</h2></div><div class="pbody">
+      <table><thead><tr><th>Processor</th><th>Window</th><th>Median</th><th>Real-time factor</th></tr></thead><tbody>` +
+      lat.rows.map(r => `<tr><td>${esc(r.device)}</td><td class="mono">${r.window_s} s</td>
+        <td class="mono">${r.median_ms.toFixed(0)} ms</td><td class="mono">${r.rtf.toFixed(3)}</td></tr>`).join("") +
+      `</tbody></table>`;
+    h += cpu1
+      ? `<div class="foot">At a one second refresh: ${cpu1.streams_per_core.toFixed(1)} concurrent calls per CPU core, ${cpu1.cores_for_200_seats} cores for a 200 seat centre at full concurrency, no GPU.</div>`
+      : `<div class="foot">Capacity was not reported by this build.</div>`;
+    P.latency = h + "</div></div>";
+  }
+
+  if (R.calibration) {
+    const c = R.calibration;
+    P.calibration = `<div class="panel"><div class="phead"><h2>Calibration error</h2></div><div class="pbody">
+      <table><thead><tr><th>Test set</th><th>Raw</th><th>Platt</th><th>Isotonic, shipped</th></tr></thead><tbody>` +
+      Object.keys(c).map(k => `<tr><td>${esc(k.replace(/_/g, " "))}</td>
+        <td class="mono">${c[k].raw_sigmoid.ece.toFixed(3)}</td>
+        <td class="mono">${c[k].platt.ece.toFixed(3)}</td>
+        <td class="mono">${c[k].isotonic.ece.toFixed(3)}</td></tr>`).join("") +
+      `</tbody></table><div class="foot">A risk number is only actionable if 0.8 means eight calls in ten. Lower is better.</div></div></div>`;
+  }
+
+  if (R.adaptation) {
+    P.adaptation = `<div class="panel"><div class="phead"><h2>Cost of adapting to a new cloner</h2></div><div class="pbody">
+      <table><thead><tr><th>Labelled recordings</th><th>Error on the new cloner</th><th>Error on families already seen</th></tr></thead><tbody>` +
+      R.adaptation.map(r => `<tr><td class="mono">${r.shots}</td>
+        <td class="mono">${(r.eer_unseen_heldout * 100).toFixed(1)}%</td>
+        <td class="mono">${(r.eer_seen_test * 100).toFixed(1)}%</td></tr>`).join("") +
+      `</tbody></table><div class="foot">Scored on speakers the adapted model never saw. This is what one re-evaluation cycle costs when a new cloner ships.</div></div></div>`;
+  }
+
+  const band = (cls, title, sub, parts) => {
+    const kept = parts.filter(Boolean);
+    if (!kept.length) return "";
+    return `<section class="band ${cls}"><div class="bandhead"><span class="bt">${title}</span>` +
+      `<span class="bs">${sub}</span></div><div class="bandgrid">${kept.join("")}</div></section>`;
+  };
+  const bands = [
+    band("band-lead", "Does it hold up on a cloner it has never heard?",
+      "Every figure here is scored on a generator family held out of training.",
+      [P.matrix, P.diversity]),
+    band("band-cost", "How fast is the decision, and what does it cost to run?",
+      "Time to a usable answer, and the compute behind it.",
+      [P.streaming, P.latency]),
+    band("band-trust", "Can the number be trusted, and kept current?",
+      "Whether the risk reads as a probability, and what a new cloner costs to absorb.",
+      [P.calibration, P.adaptation])
+  ].filter(Boolean);
+  ev.innerHTML = bands.length ? bands.join("") : '<div class="empty">This build reported no measurements.</div>';
+  evidenceLoaded = true;
+}
+
+/* ================================================================ ABOUT */
+const dlg = $("aboutdlg");
+$("aboutbtn").onclick = async () => {
+  $("aboutbody").innerHTML = '<div class="empty">Loading.</div>';
+  if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+  let a = {}, R = {};
+  try { a = await getJSON("/api/about"); } catch (e) { a = { error: e.message }; }
+  try { R = await getJSON("/api/results"); } catch (e) { }
+  if (a.error) { $("aboutbody").innerHTML = `<div class="err">Diagnostics are not available: ${esc(a.error)}</div>`; return; }
+  const row = (k, v) => `<div class="kv"><span>${esc(k)}</span><b>${v === null || v === undefined || v === "" ? "not reported" : esc(v)}</b></div>`;
+  $("aboutbody").innerHTML = `
+    <h3>Detector</h3>
+    ${row("Speech model", a.model)}
+    ${row("Layer read", a.layer)}
+    ${row("Trained parameters on top", a.n_trainable != null ? a.n_trainable.toLocaleString("en-US") : null)}
+    ${row("Generator families in training", (a.generators || []).length ? a.generators.join(", ") : null)}
+    ${row("Compute device requested", a.device + ", " + a.dtype)}
+    <h3>Gate</h3>
+    ${row("Audio refresh", a.hop_s != null ? a.hop_s + " s" : null)}
+    ${row("Earliest decision", a.min_commit_s != null ? a.min_commit_s + " s" : null)}
+    ${row("Trailing context", a.max_context_s != null ? a.max_context_s + " s" : null)}
+    ${row("Stability window", a.stability_window != null ? a.stability_window + " updates, tolerance " + a.stability_tol : null)}
+    ${row("Threshold band measured for", (a.band_by_channel || []).map(carrier).join("; "))}
+    ${row("Unknown carrier falls back to", carrier(a.fallback_channel))}
+    <h3>Challenge</h3>
+    ${row("Distinct phrases", a.challenge_space != null ? a.challenge_space.toLocaleString("en-US") : null)}
+    ${row("Issued after", a.challenge_after_s != null ? a.challenge_after_s + " s of an undecidable score" : null)}
+    ${row("Answer deadline", a.challenge_deadline_s != null ? a.challenge_deadline_s + " s" : null)}
+    <h3>Carriers</h3>
+    ${row("Modelled", (a.conditions || []).map(carrier).join("; "))}
+    ${Object.entries(a.unavailable || {}).map(([k, v]) => row("Absent: " + k, v)).join("")}
+    <h3>Measurements</h3>
+    ${row("Results generated", R.generated_utc)}
+    ${row("Clips measured", R.dataset ? R.dataset.n_clips.toLocaleString("en-US") : null)}
+    ${row("Cached embeddings", R.dataset ? R.dataset.n_embeddings.toLocaleString("en-US") : null)}
+    <h3>Network</h3>
+    ${row("External requests", "none, this console loads no font, script or style from the network")}`;
+};
+$("aboutclose").onclick = () => { if (dlg.open) dlg.close(); else dlg.removeAttribute("open"); };
+
+window.addEventListener("beforeunload", () => { closeSocket(); stopMic(); });
+</script>
+</body>
+</html>

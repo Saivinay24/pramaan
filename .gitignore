@@ -1,0 +1,14 @@
+data/clips/
+data/raw/
+data/*.log
+data/rows_*.json
+eval/results/*.npz
+eval/results/*.pkl
+eval/results/*.log
+runs/
+__pycache__/
+*.pyc
+.DS_Store
+data/mic_tests/
+video/out/
+video/source/*.mp4

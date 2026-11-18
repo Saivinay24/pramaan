@@ -1,0 +1,16 @@
+{
+ "title": "Genuine caller · Tamil (FLEURS recording)",
+ "origin": "real human speech, FLEURS tamil, CC-BY 4.0",
+ "language": "tamil",
+ "label": "human",
+ "caller": {
+  "name": "Priya Raghavan",
+  "claims": "claims to be Head of Treasury"
+ },
+ "action": {
+  "what": "Approve outward transfer to a new beneficiary",
+  "amount": "₹ 42,00,000",
+  "to": "to a beneficiary added 11 minutes ago"
+ },
+ "seed": 7
+}

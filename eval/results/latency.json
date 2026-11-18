@@ -1,0 +1,73 @@
+{
+  "rows": [
+    {
+      "device": "mps",
+      "window_s": 1.5,
+      "median_ms": 44.877667000037036,
+      "rtf": 0.029918444666691357,
+      "p90_ms": 46.321974999591475
+    },
+    {
+      "device": "mps",
+      "window_s": 2.0,
+      "median_ms": 58.6524170003031,
+      "rtf": 0.02932620850015155,
+      "p90_ms": 61.25160820029123
+    },
+    {
+      "device": "mps",
+      "window_s": 4.0,
+      "median_ms": 103.85670900086552,
+      "rtf": 0.02596417725021638,
+      "p90_ms": 105.95187500002794
+    },
+    {
+      "device": "cpu",
+      "window_s": 1.5,
+      "median_ms": 86.39716600009706,
+      "rtf": 0.05759811066673137,
+      "p90_ms": 87.52861720004148
+    },
+    {
+      "device": "cpu",
+      "window_s": 2.0,
+      "median_ms": 106.9151250003415,
+      "rtf": 0.05345756250017075,
+      "p90_ms": 108.23137519982993
+    },
+    {
+      "device": "cpu",
+      "window_s": 4.0,
+      "median_ms": 184.66420900040248,
+      "rtf": 0.04616605225010062,
+      "p90_ms": 191.4052335998349
+    }
+  ],
+  "capacity": {
+    "cpu_hop_0.5": {
+      "hop_s": 0.5,
+      "cpu_seconds_per_call_second": 0.36932841800080496,
+      "streams_per_core": 2.7076172622000088,
+      "cores_for_200_seats": 74
+    },
+    "cpu_hop_1.0": {
+      "hop_s": 1.0,
+      "cpu_seconds_per_call_second": 0.18466420900040248,
+      "streams_per_core": 5.4152345244000175,
+      "cores_for_200_seats": 37
+    },
+    "mps_hop_0.5": {
+      "hop_s": 0.5,
+      "cpu_seconds_per_call_second": 0.20771341800173104,
+      "streams_per_core": 4.814325476034804,
+      "cores_for_200_seats": 42
+    },
+    "mps_hop_1.0": {
+      "hop_s": 1.0,
+      "cpu_seconds_per_call_second": 0.10385670900086552,
+      "streams_per_core": 9.628650952069608,
+      "cores_for_200_seats": 21
+    }
+  },
+  "note": "capacity assumes 100% seat concurrency, which is pessimistic"
+}
